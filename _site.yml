@@ -1,11 +1,10 @@
-name: "my-website"
+name: "Juliann E. McEachern"
+output_dir: "." 
 navbar:
-  title: "Juliann McEachern"
+  title: "Juliann E. McEachern"
   left:
     - text: "Home"
       href: index.html
-    - text: "About"
-      href: about.html
 output:
   html_document:
     theme: yeti
