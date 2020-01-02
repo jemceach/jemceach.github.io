@@ -1,0 +1,13 @@
+name: "my-website"
+navbar:
+  title: "Juliann McEachern"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+output:
+  html_document:
+    theme: yeti
+    highlight: pygments
+    css: 'style.css'
