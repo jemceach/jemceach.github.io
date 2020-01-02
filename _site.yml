@@ -1,8 +1,8 @@
-name: "Juliann E. McEachern"
+name: "jem-portfolio"
 output_dir: "." 
 navbar:
   title: "Juliann E. McEachern"
-  left:
+  right:
     - text: "Home"
       href: index.html
 output:
