@@ -1,11 +1,26 @@
 name: "jem-portfolio"
-output_dir: "." 
+output_dir: docs 
 navbar:
-  title: "Juliann E. McEachern"
-  right:
+  title: "Juliann McEachern"
+  left:
     - text: "Home"
+      icon: fa-home
       href: index.html
+    - text: Readings
+      menu:
+    - text: Module 1
+      href: test1.html
+    - text: Module 2
+      href: test2.html
+    - text: Module 3
+      href: test3.html
+  right:
+    - icon: fa-envelope fa-lg
+      href: mailto:juliann.mceachern@gmail.com
+    - icon: fa-github fa-lg
+      href: http://github.com/jemceach
+    - icon: fa-linkedin fa-lg
+      href: https://www.linkedin.com/in/juliann-m-66008680/
 output:
   html_document:
-    theme: yeti
     css: 'style.css'
