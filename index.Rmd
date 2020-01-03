@@ -1,32 +1,37 @@
 ---
-title: "HELLO"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
 ---
 
-Data Science professional and recent graduate actively seeking meaninful work. 
+# Juliann McEachern 
+
+Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb Blerb
 
 
-```{r}
-print('hello world')
-```
+## Education
+
+### CUNY MSDS
+
+text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text
+
+### UMASS Amherst
+
+text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text
+
+## Experience
+
+### Job 1 
+text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text
+
+### Job 2
+text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text
+
+### Job 3
+text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text
 
 
-# Testing Test
+## Skills
 
-```{r}
-library(ggplot2)
-
-ggplot2::ggplot(cars) +
-  geom_line(aes(speed, dist), color="blue", size=2)+
-  theme_minimal()+
-  labs(title="1-2-3 Testing Plots",
-       subtitle = "How do I look?")
-```
-
-# gssdlkfjsdl
-
-## gfgsd
-
-## dfd
-
-### dsdfdsfsdf
-
+text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text

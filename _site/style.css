@@ -1,35 +1,57 @@
 
-h1 {
-  font-size: 32px;
-  color: purple
-}
 
 /*----------------NAVBAR ---------------*/
 
-.navbar-default {
-    background-color: #286DA8;
-    color: #FFFFFF;
+
+.navbar {background: #FFFFFF;}
+
+#jm {
+  width: 2em;
+  height: auto;
 }
 
-
-.navbar-default .navbar-nav>.open>a, 
-.navbar-default .navbar-nav>.active>a, 
-.dropdown-toggle:hover {
-  background-color: yellow;
+.navbar-name {
+  font-family: 'Century Gothic', sans-serif;
+  color: #008cd1;
+  font-size: 1.5em;
+  padding-top: .5em;
+  padding-left: .25em;
 }
 
-
-/* Dropdown menu color */
-.navbar-default .dropdown-menu {
-  background-color: orange;
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>li>a{
+  color: #000000;
+  background-color: #FFFFFF;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: 1px 3px 15px 1px rgba(0,0,0,0.1);
 }
 
-/* Dropdown menu hover color */
-  .navbar-default .dropdown-menu>li>a:hover {
-    background-color: yellow;
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>li>a:focus,
+.navbar-default .navbar-nav>li>a:hover{
+  background-color: #FFFFFF;
+  color: #008cd1;
+}
+
+@media print {
+  .distill-site-nav {
+    display: none;
   }
+}
 
+body .main-container {
+max-width: 1150px;
+}
 
-.navbar {
-  color: purple;
+/* Heading Font */  
+ 
+h1, .h1 {
+  font-family: 'Century Gothic', sans-serif; 
+  font-size: 3em;
+}
+
+h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
+  font-family: 'Century Gothic', sans-serif; font-weight: bold;
+}
 }
