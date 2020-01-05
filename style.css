@@ -1,19 +1,12 @@
-
-
 /*----------------NAVBAR ---------------*/
 
 
 .navbar {background: #FFFFFF;}
 
-#jm {
-  width: 2em;
-  height: auto;
-}
-
 .navbar-name {
   font-family: 'Century Gothic', sans-serif;
   color: #008cd1;
-  font-size: 1.5em;
+  font-size: 2em;
   padding-top: .5em;
   padding-left: .25em;
 }
@@ -46,12 +39,51 @@ max-width: 1150px;
 
 /* Heading Font */  
  
+
 h1, .h1 {
   font-family: 'Century Gothic', sans-serif; 
-  font-size: 3em;
+  font-size: 2em;
+  font-weight: bold;
+  color: #45535a;
 }
 
-h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
+h2, .h2{
+  font-family: 'Century Gothic', sans-serif; 
+  font-size: 2em;
+  font-weight: bold;
+  color: #45535a;
+}
+
+
+h3, .h3{
+  font-family: 'Century Gothic', sans-serif; 
+  font-size: 1.5em;
+}
+
+h4, .h4, h5, .h5 {
   font-family: 'Century Gothic', sans-serif; font-weight: bold;
 }
+
+p {
+  font-family: sans-serif;
+  font-size: 1.25em;
 }
+
+
+table {
+  border-spacing: 5px;
+}
+
+
+th {
+  text-align: left;
+}
+
+#about td {
+  text-align: justify;
+  border-left: 4px solid #008cd1;
+  padding-left: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
