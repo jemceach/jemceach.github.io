@@ -14,9 +14,10 @@ library(fontawesome)
 <h1> Under Construction </h1>
 
 <h1> `r fa('tools')` </h1>
+
+
+Want some content in the meantime? Check out my resume, <a href='https://github.com/jemceach/jemceach.github.io/raw/master/resume.pdf'> here </a>!
+
 </center>
-
-
-
 
 
