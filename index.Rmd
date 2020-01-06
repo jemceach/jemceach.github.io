@@ -16,7 +16,11 @@ library(fontawesome)
 <h1> `r fa('tools')` </h1>
 
 
-Want some content in the meantime? Check out my resume, <a href='https://github.com/jemceach/jemceach.github.io/raw/master/resume.pdf'> here </a>!
+Want some content in the meantime? Check out the following:  
+
+<h4><a href='https://github.com/jemceach/jemceach.github.io/raw/master/resume.pdf'>PDF Resume (download)</a>  </h4>
+<h4><a href='https://github.com/jemceach'>Github Repositories</a>  </h4>
+<h4><a href='http://rpubs.com/jemceach'>Academic Work on RPubs</a></h4>
 
 </center>
 

@@ -1,0 +1,10 @@
+---
+output: html_document
+---
+
+<br><br>
+
+```{r label, out.width = "75%", fig.width=8,  echo=F}
+library(knitr)
+include_graphics("resume.pdf")
+```
