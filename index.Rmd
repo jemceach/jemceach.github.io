@@ -18,6 +18,7 @@ output: html_document
 
 <center>
 <img src="img/me.png" width="75%">
+
 </center>
 </div>
 

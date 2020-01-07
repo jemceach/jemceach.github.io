@@ -14,10 +14,13 @@ Sys.setenv("plotly_username"=username)
 Sys.setenv("plotly_api_key"=plotly_api)
 ```
 
-<div class="fluid-row" id="header" style="padding-top: 15%; padding-left: 5%; padding-right: 5%;">
-  <h1 class="index">Portfolio</h1>
+<div class="fluid-row" id="header" style=""padding-top: 5%; padding-left: 5%; padding-right: 5%;">
+
+  <h1>Portfolio</h1>
+  <br>
+  <p>
   This site is still under development. Stayed tuned for continual updates!
-  
+  </p>
   <br>
 
 <table width='100%'>
@@ -60,8 +63,9 @@ ggplotly(p1) %>%
   </td>
   </tr>
 </table>
-
+<p>
 <b>In the works:</b> Natural Language Processing, Recommender Systems, Spatial Analytics, Predictive Analytics, and more. 
+</p>
 </div>
 
 
