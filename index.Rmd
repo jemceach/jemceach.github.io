@@ -2,26 +2,23 @@
 output: html_document
 ---
 
-```{r setup, echo=F, comment=F, message=F, warning=F}
-library(fontawesome)
-```
 
-<br>
+<div class="fluid-row" id="header" style="padding-top: 5%; padding-left: 5%; padding-right: 5%;">
+  
+
+  <h1> Hello World, I'm <b>Juliann</b>! </h1> 
+  <br>
+  <p>
+ I am a recent master's graduate from CUNY School of Professional Studies and am actively pursuing exciting, challenging, and meaningful job opportunities to put my <b>data science</b> and <b>machine learning</b> skills to work.
+ </p>
+
+  <p> 
+  This site is still under construction. Please continue to come back for frequent updates and improvements.   </p> 
+  <br> 
 
 <center>
-<span class="fas fa-tools"></span> 
-
-<h1> Under Construction </h1>
-
-<h1> `r fa('tools')` </h1>
-
-
-Want some content in the meantime? Check out the following:  
-
-<h4><a href='https://github.com/jemceach/jemceach.github.io/raw/master/resume.pdf'>PDF Resume (download)</a>  </h4>
-<h4><a href='https://github.com/jemceach'>Github Repositories</a>  </h4>
-<h4><a href='http://rpubs.com/jemceach'>Academic Work on RPubs</a></h4>
-
+<img src="img/me.png" width="75%">
 </center>
+</div>
 
 

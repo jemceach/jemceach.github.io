@@ -23,6 +23,13 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -263,51 +270,54 @@ $(document).ready(function () {
 
 
 <!-- navbar -->
- 
-<!doctype HTML>
 
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <ul class="nav navbar-name">
-        <li>
-        <b>JULIANN</b> MCEACHERN
-        </li>
-      </ul> 
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="index.html"><span class="far fa-home fa-lg"></span></a></li>
-        <li><a href="portfolio.html"><span class="fas fa-user-graduate fa-lg"></span> Portfolio</a></li>
-        <li><a href="https://github.com/jemceach/jemceach.github.io/raw/master/resume.pdf">
-          <span class="far fa-file-pdf fa-lg"></span> Resume</a></li>
-        <li><a href="mailto:juliann.mceachern@gmail.com">
-          <span class="far fa-envelope fa-lg"></span> Contact</a></li>
-        
-        
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-          <span class="fas fa-link fa-lg"></span>
-            Connect <span class="fas fa-caret-down"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="https://www.linkedin.com/in/juliann-m-66008680/">
-              <span class="fab fa-linkedin fa-lg"></span>
-              LinkedIn</a></li>
-            <li><a href="https://github.com/jemceach">
-              <span class="fa fa-github fa-lg"></span> 
-            Github</a></li>
-          </ul>   
-        </li>
-    </ul>
+<!DOCTYPE HTML>
+<div class="sidenav" role="navigation">
+  <h1>Juliann McEachern</h1>
+  <h2>Data Scientist</h2>
+  <br>
+  <ul id="nav">
+    <li>
+      <a href="index.html">About</a>
+    </li>
+    <li>
+      <a href="portfolio.html">Portfolio</a>
+    </li>
+    <li>
+      <a href="https://github.com/jemceach/jemceach.github.io/blob/master/resume.pdf">Resumé</a>
+    </li>
+  </ul>
 
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
+<div class="footer">
+  <table width='90%' style="text-align:center;">
+    <tr>
+      <td style="text-align:left;">
+        Connect:
+      </td>
+      <td width='15%'>
+        <a href="mailto:juliann.mceachern@gmail.com">
+          <span class="fa fa-envelope fa-lg"></span>
+        </a>
+      </td>
+      <td width='15%'>
+        <a href="https://www.linkedin.com/in/juliann-m-66008680/" target="_blank">
+          <span class="fab fa-linkedin fa-lg"></span> 
+        </a>
+      </td>
+      <td width='15%'>
+        <a href="https://github.com/jemceach" target="_blank">
+          <span class="fab fa-github fa-lg"></span>
+        </a>
+      </td>
+      <td width='15%'>
+        <a href="http://rpubs.com/jemceach" target="_blank">
+          <span class="fab fa-r-project fa-lg"></span> 
+        </a>
+      </td>
+    </tr>
+  </table>
+</div>
+</div>
 
 <div class="fluid-row" id="header">
 
@@ -317,18 +327,33 @@ $(document).ready(function () {
 </div>
 
 
+<div class="fluid-row" id="header" style="padding-top: 15%; padding-left: 5%; padding-right: 5%;">
+<h1 class="index">
+Portfolio
+</h1>
+<p>This site is still under development. Stayed tuned for continual updates!</p>
 <p><br></p>
-<center>
-<p><span class="fas fa-tools"></span></p>
-<h1>
-Under Construction
-</h1>
-<h1>
-<svg style="height:0.8em;top:.04em;position:relative;" viewBox="0 0 512 512">
-<path d="M501.1 395.7L384 278.6c-23.1-23.1-57.6-27.6-85.4-13.9L192 158.1V96L64 0 0 64l96 128h62.1l106.6 106.6c-13.6 27.8-9.2 62.3 13.9 85.4l117.1 117.1c14.6 14.6 38.2 14.6 52.7 0l52.7-52.7c14.5-14.6 14.5-38.2 0-52.7zM331.7 225c28.3 0 54.9 11 74.9 31l19.4 19.4c15.8-6.9 30.8-16.5 43.8-29.5 37.1-37.1 49.7-89.3 37.9-136.7-2.2-9-13.5-12.1-20.1-5.5l-74.4 74.4-67.9-11.3L334 98.9l74.4-74.4c6.6-6.6 3.4-17.9-5.7-20.2-47.4-11.7-99.6.9-136.6 37.9-28.5 28.5-41.9 66.1-41.2 103.6l82.1 82.1c8.1-1.9 16.5-2.9 24.7-2.9zm-103.9 82l-56.7-56.7L18.7 402.8c-25 25-25 65.5 0 90.5s65.5 25 90.5 0l123.6-123.6c-7.6-19.9-9.9-41.6-5-62.7zM64 472c-13.2 0-24-10.8-24-24 0-13.3 10.7-24 24-24s24 10.7 24 24c0 13.2-10.7 24-24 24z"/>
-</svg>
-</h1>
-</center>
+<table width='100%'>
+<tr>
+<h3>
+Time Series
+</h3>
+</tr>
+<tr>
+<td>
+<h4>
+<a href="time_series.html">ARIMA Modeling</a>
+</h4>
+Forecasting ATM Cash Withdrawals
+</td>
+<td width='75%'>
+<div id="htmlwidget-06191ec38955597382ad" style="width:100%;height:288px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-06191ec38955597382ad">{"x":{"data":[{"x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365],"y":[96,82,85,90,99,88,8,104,87,93,86,111,75,6,102,73,92,82,86,73,20,100,93,90,94,98,73,10,97,102,85,85,108,94,14,3,96,109,96,145,81,16,142,102,120,106,130,108,21,140,110,115,98,108,66,13,99,105,104,98,110,79,16,110,96,114,126,126,73,4,19,114,98,97,114,78,19,102,94,108,91,86,78,16,114,115,108,102,129,79,13,103,90,68,85,99,86,13,116,105,123,114,127,111,34,151,110,115,112,132,94,24,122,104,128,120,174,96,13,121,133,118,91,120,88,19,150,144,121,105,133,109,18,1,105,112,82,111,79,13,112,99,140,110,180,73,7,106,103,93,96,117,80,14,120,91,96,74,108,73,13,93,94,76,111,88,76,9,87,105,78,67,90,68,9,78,74,74,60,75,61,9,90,86,86,79,90,80,21,93,104,109,88,96,70,15,73,94,108,73,87,75,10,92,87,74,73,93,66,18,99,94,136,6,140,73,9,140,103,110,90,135,67,12,109,84,92,84,118,68,14,90,92,93,85,93,70,13,90,91,102,97,42,2,14,132,108,120,120,90,48,15,86,109,115,123,123,60,22,81,98,94,76,96,72,12,91,74,104,74,91,66,28,152,97,100,85,123,46,38,138,74,85,78,123,50,28,105,109,26,54,105,179,125,84,99,110,80,1,111,115,108,100,152,90,4,128,87,84,69,112,62,4,94,102,98,88,123,55,4,92,88,92,92,117,73,3,85,88,76,93,116,68,19,127,93,97,102,109,68,4,105,79,90,87,92,63,3,103,80,80,84,81,88,3,100,69,85,85,109,74,4,96,82,85],"text":["Day:   1<br />Cash:  96","Day:   2<br />Cash:  82","Day:   3<br />Cash:  85","Day:   4<br />Cash:  90","Day:   5<br />Cash:  99","Day:   6<br />Cash:  88","Day:   7<br />Cash:   8","Day:   8<br />Cash: 104","Day:   9<br />Cash:  87","Day:  10<br />Cash:  93","Day:  11<br />Cash:  86","Day:  12<br />Cash: 111","Day:  13<br />Cash:  75","Day:  14<br />Cash:   6","Day:  15<br />Cash: 102","Day:  16<br />Cash:  73","Day:  17<br />Cash:  92","Day:  18<br />Cash:  82","Day:  19<br />Cash:  86","Day:  20<br />Cash:  73","Day:  21<br />Cash:  20","Day:  22<br />Cash: 100","Day:  23<br />Cash:  93","Day:  24<br />Cash:  90","Day:  25<br />Cash:  94","Day:  26<br />Cash:  98","Day:  27<br />Cash:  73","Day:  28<br />Cash:  10","Day:  29<br />Cash:  97","Day:  30<br />Cash: 102","Day:  31<br />Cash:  85","Day:  32<br />Cash:  85","Day:  33<br />Cash: 108","Day:  34<br />Cash:  94","Day:  35<br />Cash:  14","Day:  36<br />Cash:   3","Day:  37<br />Cash:  96","Day:  38<br />Cash: 109","Day:  39<br />Cash:  96","Day:  40<br />Cash: 145","Day:  41<br />Cash:  81","Day:  42<br />Cash:  16","Day:  43<br />Cash: 142","Day:  44<br />Cash: 102","Day:  45<br />Cash: 120","Day:  46<br />Cash: 106","Day:  47<br />Cash: 130","Day:  48<br />Cash: 108","Day:  49<br />Cash:  21","Day:  50<br />Cash: 140","Day:  51<br />Cash: 110","Day:  52<br />Cash: 115","Day:  53<br />Cash:  98","Day:  54<br />Cash: 108","Day:  55<br />Cash:  66","Day:  56<br />Cash:  13","Day:  57<br />Cash:  99","Day:  58<br />Cash: 105","Day:  59<br />Cash: 104","Day:  60<br />Cash:  98","Day:  61<br />Cash: 110","Day:  62<br />Cash:  79","Day:  63<br />Cash:  16","Day:  64<br />Cash: 110","Day:  65<br />Cash:  96","Day:  66<br />Cash: 114","Day:  67<br />Cash: 126","Day:  68<br />Cash: 126","Day:  69<br />Cash:  73","Day:  70<br />Cash:   4","Day:  71<br />Cash:  19","Day:  72<br />Cash: 114","Day:  73<br />Cash:  98","Day:  74<br />Cash:  97","Day:  75<br />Cash: 114","Day:  76<br />Cash:  78","Day:  77<br />Cash:  19","Day:  78<br />Cash: 102","Day:  79<br />Cash:  94","Day:  80<br />Cash: 108","Day:  81<br />Cash:  91","Day:  82<br />Cash:  86","Day:  83<br />Cash:  78","Day:  84<br />Cash:  16","Day:  85<br />Cash: 114","Day:  86<br />Cash: 115","Day:  87<br />Cash: 108","Day:  88<br />Cash: 102","Day:  89<br />Cash: 129","Day:  90<br />Cash:  79","Day:  91<br />Cash:  13","Day:  92<br />Cash: 103","Day:  93<br />Cash:  90","Day:  94<br />Cash:  68","Day:  95<br />Cash:  85","Day:  96<br />Cash:  99","Day:  97<br />Cash:  86","Day:  98<br />Cash:  13","Day:  99<br />Cash: 116","Day: 100<br />Cash: 105","Day: 101<br />Cash: 123","Day: 102<br />Cash: 114","Day: 103<br />Cash: 127","Day: 104<br />Cash: 111","Day: 105<br />Cash:  34","Day: 106<br />Cash: 151","Day: 107<br />Cash: 110","Day: 108<br />Cash: 115","Day: 109<br />Cash: 112","Day: 110<br />Cash: 132","Day: 111<br />Cash:  94","Day: 112<br />Cash:  24","Day: 113<br />Cash: 122","Day: 114<br />Cash: 104","Day: 115<br />Cash: 128","Day: 116<br />Cash: 120","Day: 117<br />Cash: 174","Day: 118<br />Cash:  96","Day: 119<br />Cash:  13","Day: 120<br />Cash: 121","Day: 121<br />Cash: 133","Day: 122<br />Cash: 118","Day: 123<br />Cash:  91","Day: 124<br />Cash: 120","Day: 125<br />Cash:  88","Day: 126<br />Cash:  19","Day: 127<br />Cash: 150","Day: 128<br />Cash: 144","Day: 129<br />Cash: 121","Day: 130<br />Cash: 105","Day: 131<br />Cash: 133","Day: 132<br />Cash: 109","Day: 133<br />Cash:  18","Day: 134<br />Cash:   1","Day: 135<br />Cash: 105","Day: 136<br />Cash: 112","Day: 137<br />Cash:  82","Day: 138<br />Cash: 111","Day: 139<br />Cash:  79","Day: 140<br />Cash:  13","Day: 141<br />Cash: 112","Day: 142<br />Cash:  99","Day: 143<br />Cash: 140","Day: 144<br />Cash: 110","Day: 145<br />Cash: 180","Day: 146<br />Cash:  73","Day: 147<br />Cash:   7","Day: 148<br />Cash: 106","Day: 149<br />Cash: 103","Day: 150<br />Cash:  93","Day: 151<br />Cash:  96","Day: 152<br />Cash: 117","Day: 153<br />Cash:  80","Day: 154<br />Cash:  14","Day: 155<br />Cash: 120","Day: 156<br />Cash:  91","Day: 157<br />Cash:  96","Day: 158<br />Cash:  74","Day: 159<br />Cash: 108","Day: 160<br />Cash:  73","Day: 161<br />Cash:  13","Day: 162<br />Cash:  93","Day: 163<br />Cash:  94","Day: 164<br />Cash:  76","Day: 165<br />Cash: 111","Day: 166<br />Cash:  88","Day: 167<br />Cash:  76","Day: 168<br />Cash:   9","Day: 169<br />Cash:  87","Day: 170<br />Cash: 105","Day: 171<br />Cash:  78","Day: 172<br />Cash:  67","Day: 173<br />Cash:  90","Day: 174<br />Cash:  68","Day: 175<br />Cash:   9","Day: 176<br />Cash:  78","Day: 177<br />Cash:  74","Day: 178<br />Cash:  74","Day: 179<br />Cash:  60","Day: 180<br />Cash:  75","Day: 181<br />Cash:  61","Day: 182<br />Cash:   9","Day: 183<br />Cash:  90","Day: 184<br />Cash:  86","Day: 185<br />Cash:  86","Day: 186<br />Cash:  79","Day: 187<br />Cash:  90","Day: 188<br />Cash:  80","Day: 189<br />Cash:  21","Day: 190<br />Cash:  93","Day: 191<br />Cash: 104","Day: 192<br />Cash: 109","Day: 193<br />Cash:  88","Day: 194<br />Cash:  96","Day: 195<br />Cash:  70","Day: 196<br />Cash:  15","Day: 197<br />Cash:  73","Day: 198<br />Cash:  94","Day: 199<br />Cash: 108","Day: 200<br />Cash:  73","Day: 201<br />Cash:  87","Day: 202<br />Cash:  75","Day: 203<br />Cash:  10","Day: 204<br />Cash:  92","Day: 205<br />Cash:  87","Day: 206<br />Cash:  74","Day: 207<br />Cash:  73","Day: 208<br />Cash:  93","Day: 209<br />Cash:  66","Day: 210<br />Cash:  18","Day: 211<br />Cash:  99","Day: 212<br />Cash:  94","Day: 213<br />Cash: 136","Day: 214<br />Cash:   6","Day: 215<br />Cash: 140","Day: 216<br />Cash:  73","Day: 217<br />Cash:   9","Day: 218<br />Cash: 140","Day: 219<br />Cash: 103","Day: 220<br />Cash: 110","Day: 221<br />Cash:  90","Day: 222<br />Cash: 135","Day: 223<br />Cash:  67","Day: 224<br />Cash:  12","Day: 225<br />Cash: 109","Day: 226<br />Cash:  84","Day: 227<br />Cash:  92","Day: 228<br />Cash:  84","Day: 229<br />Cash: 118","Day: 230<br />Cash:  68","Day: 231<br />Cash:  14","Day: 232<br />Cash:  90","Day: 233<br />Cash:  92","Day: 234<br />Cash:  93","Day: 235<br />Cash:  85","Day: 236<br />Cash:  93","Day: 237<br />Cash:  70","Day: 238<br />Cash:  13","Day: 239<br />Cash:  90","Day: 240<br />Cash:  91","Day: 241<br />Cash: 102","Day: 242<br />Cash:  97","Day: 243<br />Cash:  42","Day: 244<br />Cash:   2","Day: 245<br />Cash:  14","Day: 246<br />Cash: 132","Day: 247<br />Cash: 108","Day: 248<br />Cash: 120","Day: 249<br />Cash: 120","Day: 250<br />Cash:  90","Day: 251<br />Cash:  48","Day: 252<br />Cash:  15","Day: 253<br />Cash:  86","Day: 254<br />Cash: 109","Day: 255<br />Cash: 115","Day: 256<br />Cash: 123","Day: 257<br />Cash: 123","Day: 258<br />Cash:  60","Day: 259<br />Cash:  22","Day: 260<br />Cash:  81","Day: 261<br />Cash:  98","Day: 262<br />Cash:  94","Day: 263<br />Cash:  76","Day: 264<br />Cash:  96","Day: 265<br />Cash:  72","Day: 266<br />Cash:  12","Day: 267<br />Cash:  91","Day: 268<br />Cash:  74","Day: 269<br />Cash: 104","Day: 270<br />Cash:  74","Day: 271<br />Cash:  91","Day: 272<br />Cash:  66","Day: 273<br />Cash:  28","Day: 274<br />Cash: 152","Day: 275<br />Cash:  97","Day: 276<br />Cash: 100","Day: 277<br />Cash:  85","Day: 278<br />Cash: 123","Day: 279<br />Cash:  46","Day: 280<br />Cash:  38","Day: 281<br />Cash: 138","Day: 282<br />Cash:  74","Day: 283<br />Cash:  85","Day: 284<br />Cash:  78","Day: 285<br />Cash: 123","Day: 286<br />Cash:  50","Day: 287<br />Cash:  28","Day: 288<br />Cash: 105","Day: 289<br />Cash: 109","Day: 290<br />Cash:  26","Day: 291<br />Cash:  54","Day: 292<br />Cash: 105","Day: 293<br />Cash: 179","Day: 294<br />Cash: 125","Day: 295<br />Cash:  84","Day: 296<br />Cash:  99","Day: 297<br />Cash: 110","Day: 298<br />Cash:  80","Day: 299<br />Cash:   1","Day: 300<br />Cash: 111","Day: 301<br />Cash: 115","Day: 302<br />Cash: 108","Day: 303<br />Cash: 100","Day: 304<br />Cash: 152","Day: 305<br />Cash:  90","Day: 306<br />Cash:   4","Day: 307<br />Cash: 128","Day: 308<br />Cash:  87","Day: 309<br />Cash:  84","Day: 310<br />Cash:  69","Day: 311<br />Cash: 112","Day: 312<br />Cash:  62","Day: 313<br />Cash:   4","Day: 314<br />Cash:  94","Day: 315<br />Cash: 102","Day: 316<br />Cash:  98","Day: 317<br />Cash:  88","Day: 318<br />Cash: 123","Day: 319<br />Cash:  55","Day: 320<br />Cash:   4","Day: 321<br />Cash:  92","Day: 322<br />Cash:  88","Day: 323<br />Cash:  92","Day: 324<br />Cash:  92","Day: 325<br />Cash: 117","Day: 326<br />Cash:  73","Day: 327<br />Cash:   3","Day: 328<br />Cash:  85","Day: 329<br />Cash:  88","Day: 330<br />Cash:  76","Day: 331<br />Cash:  93","Day: 332<br />Cash: 116","Day: 333<br />Cash:  68","Day: 334<br />Cash:  19","Day: 335<br />Cash: 127","Day: 336<br />Cash:  93","Day: 337<br />Cash:  97","Day: 338<br />Cash: 102","Day: 339<br />Cash: 109","Day: 340<br />Cash:  68","Day: 341<br />Cash:   4","Day: 342<br />Cash: 105","Day: 343<br />Cash:  79","Day: 344<br />Cash:  90","Day: 345<br />Cash:  87","Day: 346<br />Cash:  92","Day: 347<br />Cash:  63","Day: 348<br />Cash:   3","Day: 349<br />Cash: 103","Day: 350<br />Cash:  80","Day: 351<br />Cash:  80","Day: 352<br />Cash:  84","Day: 353<br />Cash:  81","Day: 354<br />Cash:  88","Day: 355<br />Cash:   3","Day: 356<br />Cash: 100","Day: 357<br />Cash:  69","Day: 358<br />Cash:  85","Day: 359<br />Cash:  85","Day: 360<br />Cash: 109","Day: 361<br />Cash:  74","Day: 362<br />Cash:   4","Day: 363<br />Cash:  96","Day: 364<br />Cash:  82","Day: 365<br />Cash:  85"],"type":"scatter","mode":"lines","line":{"width":0.94488188976378,"color":"rgba(0,0,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[366,367,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,384,385,386,387,388,389,390,391,392,393,394,395,396,397],"y":[86.6822230334281,100.569237833094,73.710292000956,4.22902938718943,100.159253208527,79.3467329167084,85.7390398914344,87.1797624007239,100.388112929695,73.710292000956,4.22902938718943,100.159253208527,79.3467329167084,85.7390398914344,87.1797624007239,100.388112929695,73.710292000956,4.22902938718943,100.159253208527,79.3467329167084,85.7390398914344,87.1797624007239,100.388112929695,73.710292000956,4.22902938718943,100.159253208527,79.3467329167084,85.7390398914344,87.1797624007239,100.388112929695,73.710292000956,86.6822230334281],"text":["Day: 366<br />Cash:  86.682223","Day: 367<br />Cash: 100.569238","Day: 368<br />Cash:  73.710292","Day: 369<br />Cash:   4.229029","Day: 370<br />Cash: 100.159253","Day: 371<br />Cash:  79.346733","Day: 372<br />Cash:  85.739040","Day: 373<br />Cash:  87.179762","Day: 374<br />Cash: 100.388113","Day: 375<br />Cash:  73.710292","Day: 376<br />Cash:   4.229029","Day: 377<br />Cash: 100.159253","Day: 378<br />Cash:  79.346733","Day: 379<br />Cash:  85.739040","Day: 380<br />Cash:  87.179762","Day: 381<br />Cash: 100.388113","Day: 382<br />Cash:  73.710292","Day: 383<br />Cash:   4.229029","Day: 384<br />Cash: 100.159253","Day: 385<br />Cash:  79.346733","Day: 386<br />Cash:  85.739040","Day: 387<br />Cash:  87.179762","Day: 388<br />Cash: 100.388113","Day: 389<br />Cash:  73.710292","Day: 390<br />Cash:   4.229029","Day: 391<br />Cash: 100.159253","Day: 392<br />Cash:  79.346733","Day: 393<br />Cash:  85.739040","Day: 394<br />Cash:  87.179762","Day: 395<br />Cash: 100.388113","Day: 396<br />Cash:  73.710292","Day: 397<br />Cash:  86.682223"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(28,88,189,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[366,367,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,384,385,386,387,388,389,390,391,392,393,394,395,396,397,397,397,396,395,394,393,392,391,390,389,388,387,386,385,384,383,382,381,380,379,378,377,376,375,374,373,372,371,370,369,368,367,366,366],"y":[34.807263460914,41.7309116472265,27.9573874730476,0.379005296327077,41.2782071019191,30.7254660614131,33.9140346443583,32.5021690297006,38.927703180346,26.0958862390649,0.306200164132314,38.7869929011641,28.7277448739798,31.7632090210435,30.528698239454,36.6707414616511,24.4231861313147,0.247472311670622,36.5374993756743,26.9304329098381,29.8257262122741,28.7372821288295,34.6174783425055,22.9086343621898,0.199831799870785,34.490937711493,25.3010892726936,28.0671554817607,27.1009443186056,32.7379309689078,21.5286685985436,34.807263460914,34.807263460914,181.28051890395,187.252803301557,239.100376883783,213.616128548626,203.745628795549,191.530343179212,230.825777099093,22.8012488773637,180.635778256468,231.157924506006,206.309524886704,196.369917705601,184.486706137975,222.731432562018,21.3625519955556,173.892914580994,223.050411748614,198.856540149025,188.8239959745,177.283825289064,214.442811510658,19.9224319148149,167.00064910639,214.747855056065,191.230197196617,181.073432101164,169.889258937183,205.921124430451,18.4778942255086,159.928328212059,205.833577862396,181.28051890395,34.807263460914],"text":["Day: 366<br />Upper: 181.28052<br />Lower: 34.8072635","Day: 367<br />Upper: 205.83358<br />Lower: 41.7309116","Day: 368<br />Upper: 159.92833<br />Lower: 27.9573875","Day: 369<br />Upper:  18.47789<br />Lower:  0.3790053","Day: 370<br />Upper: 205.92112<br />Lower: 41.2782071","Day: 371<br />Upper: 169.88926<br />Lower: 30.7254661","Day: 372<br />Upper: 181.07343<br />Lower: 33.9140346","Day: 373<br />Upper: 191.23020<br />Lower: 32.5021690","Day: 374<br />Upper: 214.74786<br />Lower: 38.9277032","Day: 375<br />Upper: 167.00065<br />Lower: 26.0958862","Day: 376<br />Upper:  19.92243<br />Lower:  0.3062002","Day: 377<br />Upper: 214.44281<br />Lower: 38.7869929","Day: 378<br />Upper: 177.28383<br />Lower: 28.7277449","Day: 379<br />Upper: 188.82400<br />Lower: 31.7632090","Day: 380<br />Upper: 198.85654<br />Lower: 30.5286982","Day: 381<br />Upper: 223.05041<br />Lower: 36.6707415","Day: 382<br />Upper: 173.89291<br />Lower: 24.4231861","Day: 383<br />Upper:  21.36255<br />Lower:  0.2474723","Day: 384<br />Upper: 222.73143<br />Lower: 36.5374994","Day: 385<br />Upper: 184.48671<br />Lower: 26.9304329","Day: 386<br />Upper: 196.36992<br />Lower: 29.8257262","Day: 387<br />Upper: 206.30952<br />Lower: 28.7372821","Day: 388<br />Upper: 231.15792<br />Lower: 34.6174783","Day: 389<br />Upper: 180.63578<br />Lower: 22.9086344","Day: 390<br />Upper:  22.80125<br />Lower:  0.1998318","Day: 391<br />Upper: 230.82578<br />Lower: 34.4909377","Day: 392<br />Upper: 191.53034<br />Lower: 25.3010893","Day: 393<br />Upper: 203.74563<br />Lower: 28.0671555","Day: 394<br />Upper: 213.61613<br />Lower: 27.1009443","Day: 395<br />Upper: 239.10038<br />Lower: 32.7379310","Day: 396<br />Upper: 187.25280<br />Lower: 21.5286686","Day: 397<br />Upper: 181.28052<br />Lower: 34.8072635","Day: 397<br />Upper: 181.28052<br />Lower: 34.8072635","Day: 397<br />Upper: 181.28052<br />Lower: 34.8072635","Day: 396<br />Upper: 187.25280<br />Lower: 21.5286686","Day: 395<br />Upper: 239.10038<br />Lower: 32.7379310","Day: 394<br />Upper: 213.61613<br />Lower: 27.1009443","Day: 393<br />Upper: 203.74563<br />Lower: 28.0671555","Day: 392<br />Upper: 191.53034<br />Lower: 25.3010893","Day: 391<br />Upper: 230.82578<br />Lower: 34.4909377","Day: 390<br />Upper:  22.80125<br />Lower:  0.1998318","Day: 389<br />Upper: 180.63578<br />Lower: 22.9086344","Day: 388<br />Upper: 231.15792<br />Lower: 34.6174783","Day: 387<br />Upper: 206.30952<br />Lower: 28.7372821","Day: 386<br />Upper: 196.36992<br />Lower: 29.8257262","Day: 385<br />Upper: 184.48671<br />Lower: 26.9304329","Day: 384<br />Upper: 222.73143<br />Lower: 36.5374994","Day: 383<br />Upper:  21.36255<br />Lower:  0.2474723","Day: 382<br />Upper: 173.89291<br />Lower: 24.4231861","Day: 381<br />Upper: 223.05041<br />Lower: 36.6707415","Day: 380<br />Upper: 198.85654<br />Lower: 30.5286982","Day: 379<br />Upper: 188.82400<br />Lower: 31.7632090","Day: 378<br />Upper: 177.28383<br />Lower: 28.7277449","Day: 377<br />Upper: 214.44281<br />Lower: 38.7869929","Day: 376<br />Upper:  19.92243<br />Lower:  0.3062002","Day: 375<br />Upper: 167.00065<br />Lower: 26.0958862","Day: 374<br />Upper: 214.74786<br />Lower: 38.9277032","Day: 373<br />Upper: 191.23020<br />Lower: 32.5021690","Day: 372<br />Upper: 181.07343<br />Lower: 33.9140346","Day: 371<br />Upper: 169.88926<br />Lower: 30.7254661","Day: 370<br />Upper: 205.92112<br />Lower: 41.2782071","Day: 369<br />Upper:  18.47789<br />Lower:  0.3790053","Day: 368<br />Upper: 159.92833<br />Lower: 27.9573875","Day: 367<br />Upper: 205.83358<br />Lower: 41.7309116","Day: 366<br />Upper: 181.28052<br />Lower: 34.8072635","Day: 366<br />Upper: 181.28052<br />Lower: 34.8072635"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(198,213,239,0.4)","hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.2754946727549,"r":7.30593607305936,"b":39.6955859969559,"l":43.1050228310502},"plot_bgcolor":"rgba(255,255,255,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":{"text":"31-Day ATM Withdrawal Forecast","font":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-18.8,416.8],"tickmode":"array","ticktext":["0","100","200","300","400"],"tickvals":[0,100,200,300,400],"categoryorder":"array","categoryarray":["0","100","200","300","400"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Days","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-11.7451954543248,251.045404137978],"tickmode":"array","ticktext":["0","50","100","150","200","250"],"tickvals":[0,50,100,150,200,250],"categoryorder":"array","categoryarray":["0","50","100","150","200","250"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Cash","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":"transparent","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative","annotations":[{"x":1,"y":-0.2,"text":"95% Confidence Level","showarrow":false,"xref":"paper","yref":"paper","xanchor":"right","yanchor":"bottom","xshift":0,"yshift":0,"font":{"size":10,"color":"grey"}},{"x":1,"y":-0.2,"text":"95% Confidence Level","showarrow":false,"xref":"paper","yref":"paper","xanchor":"right","yanchor":"bottom","xshift":0,"yshift":0,"font":{"size":10,"color":"grey"}}]},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"6f6c29916dfb":{"x":{},"y":{},"type":"scatter"},"6f6c6007129":{"x":{},"y":{}},"6f6c3e534471":{"x":{},"ymax":{},"ymin":{}}},"cur_data":"6f6c29916dfb","visdat":{"6f6c29916dfb":["function (y) ","x"],"6f6c6007129":["function (y) ","x"],"6f6c3e534471":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</td>
+</tr>
+</table>
+<b>In the works:</b> Natural Language Processing, Recommender Systems, Spatial Analytics, Predictive Analytics, and more.
+</div>
 
 
 

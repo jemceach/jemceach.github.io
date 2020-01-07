@@ -2,19 +2,66 @@
 output: html_document
 ---
 
-```{r setup, echo=F, comment=F, message=F, warning=F}
+```{r, echo=F, eval=T, message=F, warning=F, error=F, comment=F}
+library('readxl')
+library(ggplot2)
+library(plotly)
+library(forecast)
 library(fontawesome)
+source('~/API/plotly.R')
+
+Sys.setenv("plotly_username"=username)
+Sys.setenv("plotly_api_key"=plotly_api)
 ```
 
-<br>
+<div class="fluid-row" id="header" style="padding-top: 15%; padding-left: 5%; padding-right: 5%;">
+  <h1 class="index">Portfolio</h1>
+  This site is still under development. Stayed tuned for continual updates!
+  
+  <br>
 
-<center>
-<span class="fas fa-tools"></span> 
+<table width='100%'>
+  <tr><h3>Time Series</h3></tr>
+  <tr>
+    <td>
+      <h4><a href="time_series.html">ARIMA Modeling</a></h4>
+      Forecasting ATM Cash Withdrawals
+    </td>
+    <td width='75%'>
+    
 
-<h1> Under Construction </h1>
+    
+```{r, echo=F, eval=T, message=F, warning=F, error=F, comment=F, fig.height=3, fig.width=4, out.width='100%', fig.align='center', cache=T}
 
-<h1> `r fa('tools')` </h1>
-</center>
+load('./projects/load/TS.RData')
 
+data <- data.frame(cbind(Day = seq(1, 365), Cash = as.vector(ATM1_ts)))
+forecast <- data.frame(cbind(Day = seq(366, 397), Cash = as.vector(ATM1_fc$mean)))
+level <- data.frame(cbind(Day = seq(366, 397), 
+                          Upper = as.vector(ATM1_fc$upper[,2]), 
+                          Lower = as.vector(ATM1_fc$lower[,2])))
+
+
+p1 <- ggplot() +
+  geom_line(data=data, aes(Day,Cash), size=.25)+
+  geom_line(data=forecast, aes(Day,Cash), color="#1c58bd")+
+  geom_ribbon(data=level, aes(x=Day, ymax=Upper, ymin=Lower), fill='#c6d5ef', alpha=.4)+
+  labs(title = "31-Day ATM Withdrawal Forecast", x="Days", y="Cash", caption="95% Confidence Interval")+
+  theme_bw()+
+  theme()
+  
+ggplotly(p1) %>% 
+  layout(annotations = list(x = 1, y = -0.2, text = "95% Confidence Level",
+                            showarrow = F, xref='paper', yref='paper', 
+                            xanchor='right', yanchor='bottom', xshift=0, yshift=0,
+                            font=list(size=10, color="grey")))
+```
+
+  </td>
+  </tr>
+</table>
+
+<b>In the works:</b> Natural Language Processing, Recommender Systems, Spatial Analytics, Predictive Analytics, and more. 
+</div>
 
 
