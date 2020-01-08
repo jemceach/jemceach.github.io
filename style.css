@@ -20,15 +20,6 @@
   font-size: 18px;
 }
 
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 240px;
-  padding-left: 1%;
-  padding-bottom: 2.5%;
-}
-
 .sidenav a {
   position: relative;
   text-decoration: none;
@@ -87,28 +78,17 @@
 
 /* On screens that are less than 700px wide, make the sidebar into a topbar */
 @media screen and (max-width: 700px) {
-  .sidenav {
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
+  .sidenav {width: 100%; height: auto; position: relative;}
   .sidenav a {float: left;}
-  div.content {margin-left: 0;}
+  body, container {margin-left: 0px; padding-left: 0px;}
 }
 
 /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
 @media screen and (max-width: 400px) {
-  .sidenav a {
-    text-align: center;
-    float: none;
-  }
+  .sidenav a {text-align: center;float: none;}
+  body, container {margin-left: 0px; padding-left: 0px;}
 }
 
-
-body {
-  padding-top: 2.5%;
-  margin-left: 240px;
-}
 
 /* Heading Font */  
  
