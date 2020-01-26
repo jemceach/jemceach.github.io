@@ -18,4 +18,41 @@ library(fontawesome)
 </center>
 
 
+# Dependencies
 
+```{r}
+## processing
+library(readxl)
+library(tidyverse)
+library(janitor)
+
+## forecasting packages
+library(urca)
+library(forecast)
+library(fpp2)
+```
+
+
+# Data Preperation
+
+```{r}
+# Load data 
+atm_data <- read_excel("./projects/data/624_ATM_Data.xlsx") 
+
+# Clean dataframe
+atm <- atm_data %>% 
+  # create wide dataframe
+  spread(ATM, Cash) %>% 
+  # remove NA column using function from janitor package
+  remove_empty(which = "cols") %>%
+  # filter unobserved values from May 2010
+  filter(DATE < as.Date("2010-05-01")) %>%
+  # ensure dates are ascending
+  arrange(DATE) 
+
+## Remove NA
+atm$ATM2[is.na(atm$ATM2)] <- mean(atm$ATM2, na.rm = TRUE) 
+
+## remove outlier
+atm$ATM4[which.max(atm$ATM4)] <- NA
+```

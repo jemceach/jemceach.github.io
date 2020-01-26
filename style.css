@@ -97,7 +97,9 @@ h1, .h1 {
   font-family: 'Franklin Gothic Book', 'sans-serif'; 
   font-size: 24px;
   text-align: left;
-  padding: 0px; margin: 0px; 
+  padding: 0px; 
+  margin-top: 5px;
+  margin-bottom: 0px;
   color: #000000;
 }
         
@@ -115,8 +117,8 @@ h3, .h3{
   font-family: 'Franklin Gothic Book', 'sans-serif'; 
   font-size: 24px;
   text-align: left;
-  padding: 0px; 
-  margin: 0px; 
+  padding: 2px; 
+  margin-top: 5px; 
   color: #000000;
   display: block;
   border-bottom: 3px solid #1c58bd;
@@ -139,7 +141,7 @@ p {
   font-family: 'Franklin Gothic Book', 'sans-serif';
   font-size: 16px;
   text-align: justify;
+  margin-top: 5px;
 }
-
 
 
