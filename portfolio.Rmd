@@ -1,4 +1,5 @@
 ---
+title: "Portfolio" 
 output: html_document
 ---
 
@@ -13,6 +14,8 @@ source('~/API/plotly.R')
 Sys.setenv("plotly_username"=username)
 Sys.setenv("plotly_api_key"=plotly_api)
 ```
+
+
 
 <div class="fluid-row" id="header" style="padding-top: 5%; padding-left: 5%; padding-right: 5%;">
 

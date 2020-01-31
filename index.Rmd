@@ -2,24 +2,92 @@
 output: html_document
 ---
 
+<a class="anchor" id="Index"></a>
 
-<div class="fluid-row" id="header" style="padding-top: 5%; padding-left: 5%; padding-right: 5%;">
+```{r, echo=F, eval=T, message=F, warning=F, error=F, comment=F}
+library('readxl')
+library(ggplot2)
+library(plotly)
+library(forecast)
+library(fontawesome)
+source('~/API/plotly.R')
+
+Sys.setenv("plotly_username"=username)
+Sys.setenv("plotly_api_key"=plotly_api)
+```
+
   
-
-  <h1> Hello World, I'm <b>Juliann</b>! </h1> 
+<div class="fluid-row" id="header" style="padding-top: 10%;">
+  <p>
+    <h4 style="text-align: center;">
+This site is still under construction. Please continue to come back for frequent updates and improvements.
+    </h4>  
+    <h1 style="text-align: center;">`r fa('tools')`</h1>
+  </p>
+  <h1> About </h1> 
   <br>
   <p>
- I am a recent master's graduate from CUNY School of Professional Studies and am actively pursuing exciting, challenging, and meaningful job opportunities to put my <b>data science</b> and <b>machine learning</b> skills to work.
- </p>
+Hello World, I'm <b>Juliann</b>! I recently graduated from CUNY School of Professional Studies with a Master of Science degree in Data Science.  I am a skilled analyst with 5 cumulative years of data-driven experience and possess a strong background in acquiring, organizing, analyzing, interpreting and visualizing data. 
+  </p>
+  <p>
+I am actively pursuing exciting, challenging, and meaningful job opportunities to put my <b>data science</b> and <b>machine learning</b> skills to work. When I am not programming, you can find me exploring the streets of NYC, enjoying a hot cup of coffee, or solving a 1000 piece puzzle.  
+  </p>
 
-  <p> 
-  This site is still under construction. Please continue to come back for frequent updates and improvements.   </p> 
-  <br> 
+<br>
+<br>
 
-<center>
-<img src="img/me.png" width="75%">
+<a class="anchor" id="Portfolio"></a>
 
-</center>
+<h1>Portfolio</h1>
+  <br>
+  <p>
+Academic and personal data science projects and tutorials:  
+  </p>
+  <br>
+
+<table width='100%'>
+  <tr><h3>Time Series</h3></tr>
+  <tr>
+    <td>
+      <h4><a href="time_series.html">ARIMA Modeling</a></h4>
+      Forecasting ATM Cash Withdrawals
+    </td>
+    <td width='75%'>
+    
+
+    
+```{r, echo=F, eval=T, message=F, warning=F, error=F, comment=F, fig.height=3, fig.width=4, out.width='100%', fig.align='center', cache=T}
+
+load('./projects/load/TS.RData')
+
+data <- data.frame(cbind(Day = seq(1, 365), Cash = as.vector(ATM1_ts)))
+forecast <- data.frame(cbind(Day = seq(366, 397), Cash = as.vector(ATM1_fc$mean)))
+level <- data.frame(cbind(Day = seq(366, 397), 
+                          Upper = as.vector(ATM1_fc$upper[,2]), 
+                          Lower = as.vector(ATM1_fc$lower[,2])))
+
+
+p1 <- ggplot() +
+  geom_line(data=data, aes(Day,Cash), size=.25)+
+  geom_line(data=forecast, aes(Day,Cash), color="#000000", size=.75, alpha=.9)+
+  geom_ribbon(data=level, aes(x=Day, ymax=Upper, ymin=Lower), fill='#C1B176', alpha=.4)+
+  labs(title = "31-Day ATM Withdrawal Forecast", x="Days", y="Cash", caption="95% Confidence Interval")+
+  theme_bw()+
+  theme()
+  
+ggplotly(p1) %>% 
+  layout(annotations = list(x = 1, y = -0.2, text = "95% Confidence Level",
+                            showarrow = F, xref='paper', yref='paper', 
+                            xanchor='right', yanchor='bottom', xshift=0, yshift=0,
+                            font=list(size=10, color="grey")))
+```
+
+  </td>
+  </tr>
+</table>
+<p>
+<b>In the works:</b> Natural Language Processing, Recommender Systems, Spatial Analytics, Predictive Analytics, and more. 
+</p>
 </div>
 
 
