@@ -30,7 +30,7 @@ This site is still under construction. Please continue to come back for frequent
 Hello World, I'm <b>Juliann</b>! I recently graduated from CUNY School of Professional Studies with a Master of Science degree in Data Science.  I am a skilled analyst with 5 cumulative years of data-driven experience and possess a strong background in acquiring, organizing, analyzing, interpreting and visualizing data. 
   </p>
   <p>
-I am actively pursuing exciting, challenging, and meaningful job opportunities to put my <b>data science</b> and <b>machine learning</b> skills to work. When I am not programming, you can find me exploring the streets of NYC, enjoying a hot cup of coffee, or solving a 1000 piece puzzle.  
+I am actively pursuing exciting, challenging, and meaningful job opportunities to put my <b>data science</b> and <b>machine learning</b> skills to work. When I am not programming, you can find me exploring the streets of NYC, enjoying a hot cup of coffee, or puzzling with friends.  
   </p>
 
 <br>
@@ -49,8 +49,8 @@ Academic and personal data science projects and tutorials:
   <tr><h3>Time Series</h3></tr>
   <tr>
     <td>
-      <h4><a href="time_series.html">ARIMA Modeling</a></h4>
-      Forecasting ATM Cash Withdrawals
+      <h4><a href="time_series.html">Forecasting</a></h4>
+      Forecasting ATM Cash Withdrawals & Plotly Tutorial. 
     </td>
     <td width='75%'>
     

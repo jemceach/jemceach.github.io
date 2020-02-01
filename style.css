@@ -189,9 +189,9 @@ p {
 
 
 a, a:active {
-  color: #0D4A9F; text-decoration: underline;
+  color: #949494; text-decoration: underline;
 }
 
 a:hover { 
-  color: #949494; text-decoration: underline;
+  color: #0D4A9F; text-decoration: underline;
 }
