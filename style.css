@@ -181,7 +181,7 @@ h6, .h6 {
 }
 
 p {
-  font-family: "Franklin Gothic Book"; sans-serif; 
+  font-family: "Franklin Gothic Book", sans-serif; 
   font-size: 16px;
   text-align: justify;
   margin: 2.5px;
@@ -189,7 +189,7 @@ p {
 }
 
 p, body, div, span {
-  font-family: "Franklin Gothic Book"; sans-serif; 
+  font-family: "Franklin Gothic Book", sans-serif; 
   font-size: 16px;
   text-align: justify;
   margin: 0px;
@@ -197,7 +197,17 @@ p, body, div, span {
 }
 
 
+@media only screen and (min-width: 980px) {
+   @font-face {
+      font-family: "Franklin Gothic Book", sans-serif; 
+      font-weight: normal;
+      font-style: normal;
+   }
 
+   p, body, div, span {
+      font-family: "Franklin Gothic Book", sans-serif; 
+   }
+}
 
 
 #TOC {
