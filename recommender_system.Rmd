@@ -82,28 +82,20 @@ item_profile <- tidy_books %>%
   ## Mutate data type of tag name variable 
   mutate(tag_name = as.character(tag_name))  %>%
   ## Rename for simplicity
-  rename(tags = tag_name, id = goodreads_book_id) 
+  rename(tags = tag_name, id = goodreads_book_id) %>% ## Group by book id 
+  group_by(id) %>%
+  ## Concatenate tags
+  mutate(tags = paste0(tags, collapse = ", "))  %>%
+  ungroup() %>%
+  unique() %>% 
+  arrange(id) 
 ```
 
 <h4>Item Profile Exerpt: </h4>
 
 ```{r item_profile, echo=F}
 # Preview Item Profile
-item_profile %>% filter(id == 1)
-```
-
-
-```{r, eval=F, echo=F}
-# Preview entry
-item_profile%>%
-  ## Group by book id 
-  group_by(id) %>%
-  filter(id == 1) %>%
-  ## Concatenate tags
-  mutate(tags = paste0(tags, collapse = ", "))  %>%
-  ungroup() %>%
-  unique() %>% 
-  arrange(id) %>% t() %>% kable(caption = "Item-Profile Example") %>% kable_styling() %>% column_spec(1, bold=T)
+item_profile %>% filter(id == 1) %>% t() %>% kable(caption = "Item-Profile") %>% kable_styling() %>% column_spec(1, bold=T)
 ```
 
 
@@ -123,13 +115,41 @@ Using the **`tidytext`** package, each row was unnested by word and then further
 <p>
 The frequency of each word per book id was then evaluated, tallied, and casted into the DTM. 
 </p>
+
+```{r}
+tidy_profile <- item_profile %>%
+  ## Tidy: Remove stop words
+  filter(!tags %in% tm::stopwords(kind = "english")) %>%
+  ## Tidy: Stem words
+  mutate_at("tags", funs(SnowballC::wordStem((.), language="english")))
+
+
+it_train = itoken(iterable = tidy_profile$tags, 
+                  n_chunks=1,
+             tokenizer = word_tokenizer, 
+             ids = tidy_profile$id, 
+             progressbar = FALSE)
+vocab = create_vocabulary(it_train)
+
+vectorizer = vocab_vectorizer(vocab)
+dtm_train = create_dtm(it_train, vectorizer)
+
+# define tfidf model
+tfidf = TfIdf$new()
+# fit model to train data and transform train data with fitted model
+dtm_train_tfidf = fit_transform(dtm_train, tfidf)
+
+cosSparse(dtm_train_tfidf,dtm_train_tfidf, weight = "idf")
+```
+
+
 ```{r dtm}
 library(tidytext); library(tm); library(SnowballC)
 
 # Document-term Matrix 
 dtm <- item_profile %>%
   ## Split tag corpa into tokens  
-  tidytext::unnest_tokens(token = "words", tags, tags) %>%
+  ##tidytext::unnest_tokens(token = "words", tags, tags) %>%
   ## Tidy: Remove stop words
   filter(!tags %in% tm::stopwords(kind = "english")) %>%
   ## Tidy: Stem words
@@ -150,19 +170,62 @@ tm::inspect(dtm)
 <p>The inverse document frequency (IDF) component informs how useful a term is. This is calculated by taking the logarithm of the total the number of terms within the corpus divided the total by the number of documents were an individual term appears. The **`tm`** package can be used again efficiently weight the sparse, document term matrix by calculating and multiplying the TF and IDF matrices. </p>
 
 ```{r tfidf}
-tfidf <- tm::weightTfIdf(dtm, normalize = T)
+tfidf <- tm::weightTfIdf(dtm, normalize = F)
 ```
 
-<h3>Text Clustering</h3>
-<p>Text clustering is used to understand and categorize text-based documents, such as the terms in our TF-IDF matrix. We can cluster the data by applying cosine similarity to the TF-IDF matrix to evaluate the distance between document terms. The corresponding values provide a measurement of similarity between the terms. </p>
+<h4>Text Clustering</h4>
+<p>To understand the terms in our TF-IDF matrix, we can use cosine similarity as a text clustering method to categorize the terms within the documents. Cosine similarity evaluates the distance between document terms in the TF-IDF and the corresponding values provide a measurement of likeness between document terms. </p>
 
-<p>While **`tm`** was useful for large-scale TF-IDF matrix calculation, this method results in a sparse, simple_triplet_matrix. The cosine similiary is calculated below using the slam package to properly interpret this data type.</p>
+<p>While **`tm`** is useful for large-scale TF-IDF calculation, this method results in a sparse, simple_triplet_matrix. The **`slam`** package can be used to interpret this data type and calculate cosine similarity</p>
 
 ```{r}
 library(slam)
-co_sim <- 1 - crossprod_simple_triplet_matrix(tfidf)/(sqrt(col_sums(tfidf^2) %*% t(col_sums(tfidf^2))))
+co_sim <- 1 - slam::crossprod_simple_triplet_matrix(tfidf)/(sqrt(col_sums(tfidf^2) %*% t(col_sums(tfidf^2))))
 
+degree <- acos(slam::crossprod_simple_triplet_matrix(tfidf)/(sqrt(col_sums(tfidf^2) %*% t(col_sums(tfidf^2))))) * 180 / pi
 ```
+
+<h4> Recommender</h4>
+
+```{r}
+library(reshape2)
+co_sim_long <- co_sim %>% as.data.frame() %>% 
+  rownames_to_column('tag') %>% 
+  melt("tag") %>% 
+  filter(value !="NaN" & value > 0) %>% 
+  arrange(tag, variable, value) 
+
+idx <- co_sim_long %>%
+  group_by(tag) %>%
+  group_indices()
+
+co_sim_long <- cbind(idx, co_sim_long)
+
+co_sim_long
+```
+
+
+```{r}
+calc_cos_sim <- function(title,
+                         return_n = 5) {
+  # find our song
+  song_col_index <- which(colnames(rating_mat) == song_code)
+  # calculate cosine similarity for each song based on 
+  # number of plays for users
+  # apply(..., 2) iterates over the columns of a matrix
+  cos_sims <- apply(rating_mat, 2,
+                    FUN = function(y) 
+                      cosine_sim(rating_mat[,song_col_index], y))
+  # return results
+  data_frame(song_id = names(cos_sims), cos_sim = cos_sims) %>%
+    filter(song_id != song_code) %>% # remove self reference
+    inner_join(songs) %>%
+    arrange(desc(cos_sim)) %>%
+    top_n(return_n, cos_sim) %>%
+    select(song_id, title, artist_name, cos_sim)
+}
+```
+
 
 
 
