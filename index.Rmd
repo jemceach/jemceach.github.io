@@ -2,7 +2,6 @@
 output: html_document
 ---
 
-<a class="anchor" id="Index"></a>
 
 ```{r, echo=F, eval=T, message=F, warning=F, error=F, comment=F}
 library('readxl')
@@ -16,78 +15,47 @@ Sys.setenv("plotly_username"=username)
 Sys.setenv("plotly_api_key"=plotly_api)
 ```
 
-  
-<div class="fluid-row" id="header" style="padding-top: 10%;">
-  <p>
-    <h4 style="text-align: center;">
-This site is still under construction. Please continue to come back for frequent updates and improvements.
-    </h4>  
-    <h1 style="text-align: center;">`r fa('tools')`</h1>
-  </p>
-  <h1> About </h1> 
+<div class="row align-items-center" style="padding-top: 5%;">
+  <div class="col-xs-12 col-sm-4 col-md-4" style="padding-top: 10%;">
+  <center>
+  <img src="./img/peapod.jpg" width="300px">
+  <figcaption>Say hello to <b>Peapod</b>! Don't let the stink eye fool you. She's all bark, no byte.</figcaption>
+  <br>
+  <br>
+  <table id="tbl_links">
+  <tr><td>
+  <a href="mailto:juliann.mceachern@gmail.com" target="_blank"><i class="fa fa-envelope"></i></a>
+  </td><td>
+  <a href="https://linkedin.com/in/juliann-mceachern/" target="_blank"><i class="fab fa-linkedin"></i></a>
+  </td><td>
+  <a href="https://github.com/jemceach" target="_blank"><i class="fab fa-github"></i></a>
+  </td><td>
+  <a href="https://www.instagram.com/pod_life/" target="_blank"><i class="fab fa-instagram"></i></a>
+  </td></tr>
+  </table></center>
+  </div>
+  <div class="col-xs-12 col-sm-8 col-md-8" id="about" style="padding-top: 5%;">
+  <h1>About Me </h1>
+  <h1 id="ABOUT">Broke<b>R</b> than bad code & trying to do something about it...</h1> 
+  <p> 
+  Hello there! My name is Juliann and I am recent Data Science graduate looking to further my professional career.  I am a skilled analyst with 5 cumulative years of data-driven experience and possess a strong background in acquiring, organizing, analyzing, interpreting and visualizing data.  
+  </p>  
+  <br>
+  <p><span style="white-space: nowrap;">I am actively pursuing exciting, challenging, and meaningful job opportunities to put my <h6>predictive modeling</h6> and <h6>machine learning</h6> skills to work. To keep my skills sharp in the meantime, I'm happy to be able share and develop my R & python knowledge here with you.</span></p>
   <br>
   <p>
-Hello World, I'm <b>Juliann</b>! I recently graduated from CUNY School of Professional Studies with a Master of Science degree in Data Science.  I am a skilled analyst with 5 cumulative years of data-driven experience and possess a strong background in acquiring, organizing, analyzing, interpreting and visualizing data. 
-  </p>
-  <p>
-I am actively pursuing exciting, challenging, and meaningful job opportunities to put my <b>data science</b> and <b>machine learning</b> skills to work. When I am not programming, you can find me exploring the streets of NYC, enjoying a hot cup of coffee, or puzzling with friends.  
-  </p>
-
-<br>
-<br>
-
-<a class="anchor" id="Portfolio"></a>
-
-<h1>Portfolio</h1>
-  <br>
-  <p>
-Academic and personal data science projects and tutorials:  
+  This site is still under construction, so please bear with me as I dust off my mark-up language coding skills. A lot has changed since MySpace!  Keep coming back for frequent updates and improvements (and cute pictures of my favorite rescue pup / full-time assistant: Peapod <i class="fa fa-paw"></i>). 
   </p>
   <br>
-
-<table width='100%'>
-  <tr><h3>Time Series</h3></tr>
-  <tr>
-    <td>
-      <h4><a href="time_series.html">Forecasting</a></h4>
-      Forecasting ATM Cash Withdrawals & Plotly Tutorial. 
-    </td>
-    <td width='75%'>
-    
-
-    
-```{r, echo=F, eval=T, message=F, warning=F, error=F, comment=F, fig.height=3, fig.width=4, out.width='100%', fig.align='center', cache=T}
-
-load('./projects/load/TS.RData')
-
-data <- data.frame(cbind(Day = seq(1, 365), Cash = as.vector(ATM1_ts)))
-forecast <- data.frame(cbind(Day = seq(366, 397), Cash = as.vector(ATM1_fc$mean)))
-level <- data.frame(cbind(Day = seq(366, 397), 
-                          Upper = as.vector(ATM1_fc$upper[,2]), 
-                          Lower = as.vector(ATM1_fc$lower[,2])))
-
-
-p1 <- ggplot() +
-  geom_line(data=data, aes(Day,Cash), size=.25)+
-  geom_line(data=forecast, aes(Day,Cash), color="#000000", size=.75, alpha=.9)+
-  geom_ribbon(data=level, aes(x=Day, ymax=Upper, ymin=Lower), fill='#C1B176', alpha=.4)+
-  labs(title = "31-Day ATM Withdrawal Forecast", x="Days", y="Cash", caption="95% Confidence Interval")+
-  theme_bw()+
-  theme()
-  
-ggplotly(p1) %>% 
-  layout(annotations = list(x = 1, y = -0.2, text = "95% Confidence Level",
-                            showarrow = F, xref='paper', yref='paper', 
-                            xanchor='right', yanchor='bottom', xshift=0, yshift=0,
-                            font=list(size=10, color="grey")))
-```
-
-  </td>
-  </tr>
-</table>
-<p>
-<b>In the works:</b> Natural Language Processing, Recommender Systems, Spatial Analytics, Predictive Analytics, and more. 
-</p>
+  <p>
+  <h6>In the works:</h6>  
+  <ul>
+  <li> Time series tutorial: filled with gg-hacking goodies! Nothing better than learning various TS methods, while simultaneously figuring out how to make the `forecast` package play (and look) nice with ggplots. </li>
+  <li> Recommender system tutorial: content-based filtering meets shiny apps! This one will be worth the wait. Promise. </li>
+  <li> Geo-spatial analysis tutorial: Map time! </li>
+  <li> And, last (but not least): First blog plot! I was hoping this "About Me" section would count, but will probably use this opportunity to create `blogdown` tutorial down the road. </li>
+  </p>
+  </div>
 </div>
 
 

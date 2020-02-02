@@ -1,66 +1,54 @@
+
 /* Navigation */  
 
 .navbar {
-    display: inline-block;
-    vertical-align: middle;
+  vertical-align: middle;
+  position: fixed;
+  list-style: none; 
+  background-color: #000000;  
+  color: #FFFFFF;
 }
 
-.navbar, .dropdown, .dropdown> .dropdown-menu{
-  list-style: none; background-color: #000000;  color: #FFFFFF; font-weight: 300; font-size: 16px;
-}
-
-.navbar a, a:active {
-  position: relative; text-decoration: none; font-size: 16px; color: #FFFFFF; padding: 5px;
-}
-
-.navbar a:hover { 
-  color: #C1B176; text-decoration: none;
-}
-
-.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus{
-    color: #555;
-    background-color: #000000; 
+.navbar li { 
+    display:block;
+    float:left;
+    font-size: 14px;
+    font-family: "Franklin Gothic Book";
+    text-transform: uppercase;
+    text-align: justify;
 }
 
 
-.dropdown> .dropdown-menu a, a:active {
-  position: relative; 
-  text-decoration: none; 
-  font-size: 16px; 
-  background-color: #000000; 
-  color: #9B9B9B; 
-  padding: 5px;
+#topnav a {
+  display: block; text-decoration: none; background-color: #000000; color: #b186a2;
 }
 
-.dropdown > .dropdown-menu a:hover { 
-  color: #C1B176;  
-  background-color: #000000; 
-  text-decoration: none;
+#topnav a:hover { 
+  color: #FFFFFF; text-decoration: none;
 }
 
-
-.navbar a:before {
+#topnav a:before {
   content: ""; 
   position: absolute; 
   width: 100%;  
-  height: 2px; 
-  bottom: 0; 
+  height: 5px;
   left: 0;
-  background-color: #C1B176; 
+  bottom: 1px; 
+  background-color: #b186a2; 
   visibility: hidden;
   -webkit-transform: scaleX(0);
   -moz-transform: scaleX(0);
   -ms-transform: scaleX(0);
   -o-transform: scaleX(0);
   transform: scaleX(0);
-  -webkit-transition: all 0.5s ease-in-out 0s;
-  -moz-transition: all 0.5s ease-in-out 0s;
-  -ms-transition: all 0.5s ease-in-out 0s;
-  -o-transition: all 0.5s ease-in-out 0s;
-  transition: all 0.5s ease-in-out 0s;
+  -webkit-transition: all 0.35s ease-in-out 0s;
+  -moz-transition: all 0.35s ease-in-out 0s;
+  -ms-transition: all 0.35s ease-in-out 0s;
+  -o-transition: all 0.35s ease-in-out 0s;
+  transition: all 0.35s ease-in-out 0s;
 }
 
-.navbar a:hover:before {
+#topnav a:hover:before {
   visibility: visible;
   -webkit-transform: scaleX(1);
   -moz-transform: scaleX(1);
@@ -70,92 +58,94 @@
 }
 
 
-
-
-.dropdown a:before {
-  content: ""; 
-  position: absolute; 
-  width: 100%;  
-  height: 2px; 
-  bottom: 0; 
-  left: 0;
-  background-color: #C1B176; 
-  visibility: hidden;
-  -webkit-transform: scaleX(0);
-  -moz-transform: scaleX(0);
-  -ms-transform: scaleX(0);
-  -o-transform: scaleX(0);
-  transform: scaleX(0);
-  -webkit-transition: all 0.5s ease-in-out 0s;
-  -moz-transition: all 0.5s ease-in-out 0s;
-  -ms-transition: all 0.5s ease-in-out 0s;
-  -o-transition: all 0.5s ease-in-out 0s;
-  transition: all 0.5s ease-in-out 0s;
-}
-
-.dropdown> .dropdown-menu a:before {
-  content: ""; 
-  position: absolute; 
-  width: 100%;  
-  height: 0px; 
-  bottom: 0; 
-  left: 0;
-  background-color: #C1B176; 
-  visibility: hidden;
-}
-
-
-.main-container .container {
-  width: 100%;
-  margin-left: 10px;
-  margin-right: auto;
-}
-
-/* Heading Font */  
-#name {
-  font-family: 'Franklin Gothic Book', 'sans-serif'; 
-  font-size: 18px;
+h1, .h1 {
+  font-family: 'Courier New', 'mono'; 
+  font-size: 50px;
   text-align: left;
-  padding: 0px; 
+  padding: 0; 
+  margin-top: 0;
+  margin-bottom: -2px;
+  letter-spacing: 1px;
+  line-height: 50px;
+  color: #000000;
+  background:linear-gradient(to right, #BEC0E6, #E1EFFB, #FFFFFF);
+  background:-webkit-linear-gradient(to right, #BEC0E6, #E1EFFB, #FFFFFF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#name {
+  font-family:  'Courier New', 'mono';
+  font-size: 16px;
+  text-align: left;
+  padding:0;
   margin-top: 0px;
-  margin-bottom: 0px;
+  margin-bottom: 1px;
   color: #FFFFFF;
   letter-spacing: 1px;
+  text-decoration: none;
+  line-height: 14px;
+  background: 
+    -webkit-linear-gradient(#fff, #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #fff;
 }
 
 #title {
-  font-family: 'Franklin Gothic Medium', 'sans-serif'; 
-  font-size: 17px;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif; 
+  font-size: 12px;
   text-align: left;
-  padding: 0px; 
-  margin: 0px; 
-  color: #C1B176;
+  padding: 0; 
+  margin: 0; 
+  color: #b186a2;
   letter-spacing: 2px;
+  text-transform: uppercase;
+  
 }
 
 
-h1, .h1 {
-  font-family: 'Franklin Gothic Book', 'sans-serif'; 
-  font-size: 24px;
+#logo {  
+  font-size: 22px;
   text-align: left;
-  padding: 0px; 
-  margin-top: 0px;
-  margin-bottom: 0px;
-  color: #000000;
+  padding: 0; 
+  margin: 0; 
+  color: #b186a2;
 }
+
+#ABOUT {
+  font-family: "Franklin Gothic Book"; sans-serif; 
+  font-size: 14px;
+  text-align: left;
+  line-height: 16px;
+  padding: 0; 
+  margin-top: -2px;
+  margin-bottom: 30px;
+  letter-spacing: 2px;
+  color: #000000;
+  background:linear-gradient(to right, #BEC0E6, #bbcfe1, #4B3B72);
+  background:-webkit-linear-gradient(to right, #BEC0E6, #bbcfe1, #4B3B72);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Heading Font */ 
+
+
+
+
         
 h2, .h2 {
-  font-family: 'Franklin Gothic Medium', 'sans-serif'; 
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   font-size: 22px;
   text-align: left;
   padding: 0px; 
   margin: 0px; 
-  color: #C1B176;
+  color: #eaaf80;
 }
 
 
 h3, .h3{
-  font-family: 'Franklin Gothic Book', 'sans-serif'; 
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   font-size: 18px;
   text-align: left;
   padding: 2px; 
@@ -168,30 +158,152 @@ h3, .h3{
 }
 
 h4, .h4 {
-  font-family: 'Franklin Gothic Book', sans-serif; 
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   font-weight: bold;
   font-size: 16px;
 }
 
 h5, .h5 {
-  font-family: 'Franklin Gothic Book', sans-serif; 
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   font-size: 14px;
   margin:1px;
   padding:1px;
 }
 
+h6, .h6 {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  color: #6b6890;
+  display: inline;
+  padding: 0;
+  line-height: 14px;
+}
+
 p {
-  font-family: 'Franklin Gothic Book', 'sans-serif';
+  font-family: "Franklin Gothic Book"; sans-serif; 
   font-size: 16px;
   text-align: justify;
-  margin-top: 5px;
+  margin: 2.5px;
+  line-height: 14px;
+}
+
+p, body, div, span {
+  font-family: "Franklin Gothic Book"; sans-serif; 
+  font-size: 16px;
+  text-align: justify;
+  margin: 0px;
+  line-height: 16px;
 }
 
 
-a, a:active {
-  color: #949494; text-decoration: underline;
+
+
+
+#TOC {
+  position: fixed;
+  top: 150px;
+  left: 30px;
+  height: auto;
+  width: 165px;
+  max-width:100%;
+  background-color: #cac9c6;
+  box-sizing: content-box;
+  border: solid #b7b7b4 2px;
+  padding: 2.5px;
+  font-size: 14px;
+}
+
+
+
+a {
+  display: block; text-decoration: none; background-color: #FFFFFF; color: #a188b4, text-decoration: underline;
 }
 
 a:hover { 
-  color: #0D4A9F; text-decoration: underline;
+  color: #3A356B; text-decoration: underline; 
+}
+
+#tbl_links a {
+  font-size:46px;
+  display: block; 
+  text-decoration: none; 
+  color: #a188b4;
+  -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  transition:.5s;
+}
+
+#tbl_links a:hover { 
+  color: #3A356B; text-decoration: none; 
+}
+
+
+#TOC a {
+  display: inline-block;
+  position: relative;
+  color: #000;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+#TOC a:hover {
+  color: #898988;
+  font-size: 14px;
+}
+
+#TOC a:click{
+   font-size: 4px;
+   font-size: 14px;
+}
+
+#TOC a:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: #898988;
+  visibility: hidden;
+  -webkit-transform: scaleX(0);
+  -moz-transform: scaleX(0);
+  -ms-transform: scaleX(0);
+  -o-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: all 0.5s ease-in-out 0s;
+  -moz-transition: all 0.5s ease-in-out 0s;
+  -ms-transition: all 0.5s ease-in-out 0s;
+  -o-transition: all 0.5s ease-in-out 0s;
+  transition: all 0.5s ease-in-out 0s;
+}
+
+#TOC a:hover:before {
+  visibility: visible;
+  -webkit-transform: scaleX(1);
+  -moz-transform: scaleX(1);
+  -ms-transform: scaleX(1);
+  -o-transform: scaleX(1);
+  transform: scaleX(1);
+}
+ 
+ul, li{
+  padding: 2px;
+  list-style: circle;
+}
+
+figcaption{
+  font-size: 12px;
+  font-family: "Franklin Gothic Book", sans-serif; 
+}
+
+table {
+    width: 250px;
+}
+
+table input {
+    width: 100%;
+    padding-left: 10px;
 }
