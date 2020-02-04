@@ -19,7 +19,8 @@ Sys.setenv("plotly_api_key"=plotly_api)
   <div class="col-xs-12 col-sm-4 col-md-4" style="padding-top: 10%;">
   <center>
   <img src="./img/peapod.jpg" width="300px">
-  <figcaption>Say hello to <b>Peapod</b>! Don't let the stink eye fool you. She's all bark, no byte.</figcaption>
+  <figcaption>Say hello to <b>Peapod</b>! Don't let the stink eye fool you. <br>
+  She's all bark, no byte.</figcaption>
   <br>
   <br>
   <table id="tbl_links">
@@ -41,14 +42,14 @@ Sys.setenv("plotly_api_key"=plotly_api)
   Hello there! My name is Juliann and I am recent Data Science graduate looking to further my professional career.  I am a skilled analyst with 5 cumulative years of data-driven experience and possess a strong background in acquiring, organizing, analyzing, interpreting and visualizing data.  
   </p>  
   <br>
-  <p><span style="white-space: nowrap;">I am actively pursuing exciting, challenging, and meaningful job opportunities to put my <h6>predictive modeling</h6> and <h6>machine learning</h6> skills to work. To keep my skills sharp in the meantime, I'm happy to be able share and develop my R & python knowledge here with you.</span></p>
+  <p>I am actively pursuing exciting, challenging, and meaningful job opportunities to put my <em>predictive modeling</em> and <em>machine learning</em> skills to work. To keep my skills sharp in the meantime, I'm happy to be able share and develop my R & python knowledge here with you. </p>
   <br>
   <p>
   This site is still under construction, so please bear with me as I dust off my mark-up language coding skills. A lot has changed since MySpace!  Keep coming back for frequent updates and improvements (and cute pictures of my favorite rescue pup / full-time assistant: Peapod <i class="fa fa-paw"></i>). 
   </p>
   <br>
   <p>
-  <h6>In the works:</h6>  
+  <em>In the works:</em>  
   <ul>
   <li> Time series tutorial: filled with gg-hacking goodies! Nothing better than learning various TS methods, while simultaneously figuring out how to make the `forecast` package play (and look) nice with ggplots. </li>
   <li> Recommender system tutorial: content-based filtering meets shiny apps! This one will be worth the wait. Promise. </li>
