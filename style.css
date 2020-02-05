@@ -120,12 +120,12 @@ h1, .h1 {
 }
 
 h2, .h2 {
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-family: 'Courier New', 'mono';
   font-size: 22px;
   text-align: left;
   padding: 0px; 
   margin: 0px; 
-  color: #eaaf80;
+  color: #BEC0E6;
 }
 
 
@@ -197,7 +197,7 @@ p, body, div, span {
 
 
 a {
-  display: block; text-decoration: none; background-color: #FFFFFF; color: #a188b4, text-decoration: underline;
+  display: block; text-decoration: none; color: #a188b4, text-decoration: underline;
 }
 
 a:hover { 
@@ -252,3 +252,4 @@ container, main-container {
   margin: 0; 
   color: #b186a2;
 }
+

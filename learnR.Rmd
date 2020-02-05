@@ -1,0 +1,38 @@
+---
+output: html_document
+---
+
+```{r, echo=F, eval=T, message=F, warning=F, error=F, comment=F}
+library('readxl')
+library(ggplot2)
+library(plotly)
+library(forecast)
+library(fontawesome)
+source('~/API/plotly.R')
+
+Sys.setenv("plotly_username"=username)
+Sys.setenv("plotly_api_key"=plotly_api)
+```
+
+<br>
+<br>
+
+<div class="row align-items-start" style="padding-top: 5%;">
+<h1>Learn<b>R </b></h1>
+
+I am currently working on putting together a series of in-depth tutorials on Data Science topics in R. Please continue to come back as more content is added. 
+
+  <div class="col-xs-12 col-sm-5 col-md-5" style="padding-top: 10%;">
+  <em><a href="time_series.html" onclick="fadeInOut()">Time-Series Analysis</a></em>
+  Feb 2, 2020
+  <br>
+  <br>
+  An overview of time-series fundementals and a how-to on creating, analyzing, and forecasting time-series objects in R
+  </div>
+  <div class="col-xs-12 col-sm-7 col-md-7" style="padding-top: 5%;">
+  <center>
+  <img src="./img/TS.jpg" width="400px">
+  </center>
+  </div>
+</div>
+

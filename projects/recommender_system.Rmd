@@ -1,0 +1,235 @@
+---
+title: 'Content-Based Recommender System'
+output: 
+  html_document:
+    theme: yeti
+    highlight: zenburn
+    df_print: paged
+    code_folding: hide
+---
+
+<div>
+<p>
+Content-based recommender systems are used to filter user recommendations based on unique, item profiles. The recommender built below was modified from <a href="https://github.com/jemceach/recommender-systems/blob/master/project-2/report.ipynb" target="_blank">academic coursework</a>, which used Goodreads book ratings obtained from <a href="https://fastml.com/goodbooks-10k-a-new-dataset-for-book-recommendations/" target="_blank">FastML</a>. For replication purposes, data can be obtained from either the FastML website or the original github repository:  
+<ul>
+  <li>
+    <a href="https://raw.githubusercontent.com/jemceach/recommender-systems/master/project-2/data/books.csv" target="_blank">Books Data</a>
+  </li>
+  <li>
+  <a href="https://raw.githubusercontent.com/jemceach/recommender-systems/master/project-2/data/book_tags.csv"  target="_blank">Tags ID</a>
+  </li>
+  <li>
+  <a href="https://raw.githubusercontent.com/jemceach/recommender-systems/master/project-2/data/tags.csv"  target="_blank">Tags Data</a>
+  </li>
+</ul>
+</p>
+
+<h3>Getting Started</h3>
+
+```{r set-up, echo=F, cache=F, comment=F, message=F, warning=F, tidy=T}
+# Libraries 
+library(knitr); library(kableExtra)
+
+# Set default augments for code chunks
+knitr::opts_chunk$set(echo = T, message=F, warning=F, error=F, comment=NA, fig.width=10, fig.height = 3, out.width='100%', tidy=F, tidy.opts=options(width=100))
+```
+
+<p>Building a recommender from this data first requires a little data preperation. Transformations were applied to the books data to subset columns and select english-language books from the dataset. Tags were combined and also tidied to remove numbers and punctuation.</p>
+<p>Next, the item profiles for books were built by joining the cleaned book and tags data. These tags are a very important feature for the content-based recommender we are building. They contain the content for each item profile. </p>
+
+```{r df_books}
+library(tidyverse)
+
+# Load Data 
+load('./projects/data/recommender-system.RData')
+
+# Clean books data
+tidy_books <- book_data %>%
+  ## subset columns
+  select(title, 
+         authors,
+         average_rating,
+         goodreads_book_id, 
+         original_publication_year, 
+         language_code) %>%
+  ## filter books based on language (english)
+  filter(grepl('en', language_code)) %>%
+  ## drop observations with no publication year
+  filter(!is.na(original_publication_year)) %>%
+  ## mutate data types
+  mutate(goodreads_book_id = as.integer(goodreads_book_id),
+         authors = as.character(authors),
+         title = as.character(title),
+         language_code = as.character(language_code)) %>%
+  ## Select items for item profile
+  select(goodreads_book_id, title, authors) 
+
+# Clean Tags data
+tidy_tags <- tags_id %>%
+  ## join tag_ids using book id
+  left_join(tags_data, by = "tag_id") %>%
+  # Find/remove numbers and punctuation
+  mutate(tag_name = gsub("[0-9]|[[:punct:]]", " ", tag_name)) %>%
+  # Filter empty columns containing only whitespace
+  filter(grepl('\\w', tag_name)) %>%
+  ## Drop tag columns no longer needed 
+  select(-tag_id, -count)
+
+# Build Item Profile
+item_profile <- tidy_books %>% 
+  ## join tags data using tag ids 
+  left_join(tidy_tags, by = "goodreads_book_id") %>% 
+  ## Mutate data type of tag name variable 
+  mutate(tag_name = as.character(tag_name))  %>%
+  ## Rename for simplicity
+  rename(tags = tag_name, id = goodreads_book_id) %>% ## Group by book id 
+  group_by(id) %>%
+  ## Concatenate tags
+  mutate(tags = paste0(tags, collapse = ", "))  %>%
+  ungroup() %>%
+  unique() %>% 
+  arrange(id) 
+```
+
+<h4>Item Profile Exerpt: </h4>
+
+```{r item_profile, echo=F}
+# Preview Item Profile
+item_profile %>% filter(id == 1) %>% t() %>% kable(caption = "Item-Profile") %>% kable_styling() %>% column_spec(1, bold=T)
+```
+
+
+<h3>Term Frequency - Inverse Document Frequency</h3>
+
+<p>
+Term Frequency *times* Inverse Document Frequency (TF-IDF) uses text-mining to score important words by occurance. We can apply this process to our item profile to evaluate tag importance for each book and generate recommendations.
+</p>
+
+<h4>Term Frequency</h4>
+<p>
+First, let's look at term frequency (TF) using a document-term matrix (DTM). A DTM evaluates the frequency of terms per document within a corpus of text. We can construct a DTM from the `item_profile` dataframe to analyse the text within each book tag. 
+</p>
+<p>
+Using the **`tidytext`** package, each row was unnested by word and then further processed with the **`tm` ** and **`SnowballC`** packages. Common, stop words such as "and", were removed.  Words were also stemmed to obtain the base form of each word. An example of this would be stemming the word, "winning", to "win".
+</p>
+<p>
+The frequency of each word per book id was then evaluated, tallied, and casted into the DTM. 
+</p>
+
+```{r}
+tidy_profile <- item_profile %>%
+  ## Tidy: Remove stop words
+  filter(!tags %in% tm::stopwords(kind = "english")) %>%
+  ## Tidy: Stem words
+  mutate_at("tags", funs(SnowballC::wordStem((.), language="english")))
+
+
+it_train = itoken(iterable = tidy_profile$tags, 
+                  n_chunks=1,
+             tokenizer = word_tokenizer, 
+             ids = tidy_profile$id, 
+             progressbar = FALSE)
+vocab = create_vocabulary(it_train)
+
+vectorizer = vocab_vectorizer(vocab)
+dtm_train = create_dtm(it_train, vectorizer)
+
+# define tfidf model
+tfidf = TfIdf$new()
+# fit model to train data and transform train data with fitted model
+dtm_train_tfidf = fit_transform(dtm_train, tfidf)
+
+cosSparse(dtm_train_tfidf,dtm_train_tfidf, weight = "idf")
+```
+
+
+```{r dtm}
+library(tidytext); library(tm); library(SnowballC)
+
+# Document-term Matrix 
+dtm <- item_profile %>%
+  ## Split tag corpa into tokens  
+  ##tidytext::unnest_tokens(token = "words", tags, tags) %>%
+  ## Tidy: Remove stop words
+  filter(!tags %in% tm::stopwords(kind = "english")) %>%
+  ## Tidy: Stem words
+  mutate_at("tags", funs(SnowballC::wordStem((.), language="english"))) %>%
+  ## Count frequency of tags
+  count(id, tags) %>%
+  ## Cast tidied dataframe into DocumentTermMatrix
+  tidytext::cast_dtm(term = tags,document = id,  value = n) %>% 
+  ## Remove sparse terms with maximum sparisity of 90%
+  tm::removeSparseTerms(.9)
+
+# Inspect sample from DTM
+tm::inspect(dtm)
+```
+
+<h4> Inverse Document Frequency </h4>
+
+<p>The inverse document frequency (IDF) component informs how useful a term is. This is calculated by taking the logarithm of the total the number of terms within the corpus divided the total by the number of documents were an individual term appears. The **`tm`** package can be used again efficiently weight the sparse, document term matrix by calculating and multiplying the TF and IDF matrices. </p>
+
+```{r tfidf}
+tfidf <- tm::weightTfIdf(dtm, normalize = F)
+```
+
+<h4>Text Clustering</h4>
+<p>To understand the terms in our TF-IDF matrix, we can use cosine similarity as a text clustering method to categorize the terms within the documents. Cosine similarity evaluates the distance between document terms in the TF-IDF and the corresponding values provide a measurement of likeness between document terms. </p>
+
+<p>While **`tm`** is useful for large-scale TF-IDF calculation, this method results in a sparse, simple_triplet_matrix. The **`slam`** package can be used to interpret this data type and calculate cosine similarity</p>
+
+```{r}
+library(slam)
+co_sim <- 1 - slam::crossprod_simple_triplet_matrix(tfidf)/(sqrt(col_sums(tfidf^2) %*% t(col_sums(tfidf^2))))
+
+degree <- acos(slam::crossprod_simple_triplet_matrix(tfidf)/(sqrt(col_sums(tfidf^2) %*% t(col_sums(tfidf^2))))) * 180 / pi
+```
+
+<h4> Recommender</h4>
+
+```{r}
+library(reshape2)
+co_sim_long <- co_sim %>% as.data.frame() %>% 
+  rownames_to_column('tag') %>% 
+  melt("tag") %>% 
+  filter(value !="NaN" & value > 0) %>% 
+  arrange(tag, variable, value) 
+
+idx <- co_sim_long %>%
+  group_by(tag) %>%
+  group_indices()
+
+co_sim_long <- cbind(idx, co_sim_long)
+
+co_sim_long
+```
+
+
+```{r}
+calc_cos_sim <- function(title,
+                         return_n = 5) {
+  # find our song
+  song_col_index <- which(colnames(rating_mat) == song_code)
+  # calculate cosine similarity for each song based on 
+  # number of plays for users
+  # apply(..., 2) iterates over the columns of a matrix
+  cos_sims <- apply(rating_mat, 2,
+                    FUN = function(y) 
+                      cosine_sim(rating_mat[,song_col_index], y))
+  # return results
+  data_frame(song_id = names(cos_sims), cos_sim = cos_sims) %>%
+    filter(song_id != song_code) %>% # remove self reference
+    inner_join(songs) %>%
+    arrange(desc(cos_sim)) %>%
+    top_n(return_n, cos_sim) %>%
+    select(song_id, title, artist_name, cos_sim)
+}
+```
+
+
+
+
+
+
+
+</div>

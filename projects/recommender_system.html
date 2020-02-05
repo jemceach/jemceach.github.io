@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Content-Based Recommender System</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+
+.sourceCode .row {
+  width: 100%;
+}
+.sourceCode {
+  overflow-x: auto;
+}
+.code-folding-btn {
+  margin-right: -30px;
+}
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 45px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h2 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h3 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h4 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h5 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h6 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<!-- navbar -->
+
+<!DOCTYPE HTML>
+<div class="sidenav" role="navigation">
+  <h1>Juliann McEachern</h1>
+  <h2>Data Scientist</h2>
+  <br>
+  <ul id="nav">
+    <li>
+      <a href="index.html"> About </a>
+    </li>
+    <li>
+      <a href="portfolio.html"> Portfolio </a>
+    </li>
+    <li>
+      <a href="https://github.com/jemceach/jemceach.github.io/blob/master/resume.pdf">Résumé</a>
+    </li>
+    <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            Connect <span class="fas fa-caret-down"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li>
+              <a href="mailto:juliann.mceachern@gmail.com">
+                <span class="fa fa-paper-plane fa-lg"></span>
+                Email
+              </a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/juliann-m-66008680/">
+                <span class="fab fa-linkedin fa-lg"></span>
+                LinkedIn
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/jemceach">
+                <span class="fa fa-github fa-lg"></span> 
+                Github
+              </a>
+            </li>
+          </ul>   
+        </li>
+    </ul>
+</div>
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Content-Based Recommender System</h1>
+
+</div>
+
+
+<div>
+<p>
+Content-based recommender systems are used to filter user recommendations based on unique, item profiles. The recommender built below was modified from <a href="https://github.com/jemceach/recommender-systems/blob/master/project-2/report.ipynb" target="_blank">academic coursework</a>, which used Goodreads book ratings obtained from <a href="https://fastml.com/goodbooks-10k-a-new-dataset-for-book-recommendations/" target="_blank">FastML</a>. For replication purposes, data can be obtained from either the FastML website or the original github repository:<br />
+
+<ul>
+<li>
+<a href="https://raw.githubusercontent.com/jemceach/recommender-systems/master/project-2/data/books.csv" target="_blank">Books Data</a>
+</li>
+<li>
+<a href="https://raw.githubusercontent.com/jemceach/recommender-systems/master/project-2/data/book_tags.csv"  target="_blank">Tags ID</a>
+</li>
+<li>
+<a href="https://raw.githubusercontent.com/jemceach/recommender-systems/master/project-2/data/tags.csv"  target="_blank">Tags Data</a>
+</li>
+</ul>
+</p>
+<h3>
+Getting Started
+</h3>
+<p>
+Building a recommender from this data first requires a little data preperation. Transformations were applied to the books data to subset columns and select english-language books from the dataset. Tags were combined and also tidied to remove numbers and punctuation.
+</p>
+<p>
+Next, the item profiles for books were built by joining the cleaned book and tags data. These tags are a very important feature for the content-based recommender we are building. They contain the content for each item profile.
+</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co"># Load Data </span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">load</span>(<span class="st">&#39;./projects/data/recommender-system.RData&#39;</span>)</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co"># Clean books data</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">tidy_books &lt;-<span class="st"> </span>book_data <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="st">  </span><span class="co">## subset columns</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="st">  </span><span class="kw">select</span>(title, </a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">         authors,</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">         average_rating,</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">         goodreads_book_id, </a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">         original_publication_year, </a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">         language_code) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-15" data-line-number="15"><span class="st">  </span><span class="co">## filter books based on language (english)</span></a>
+<a class="sourceLine" id="cb1-16" data-line-number="16"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">grepl</span>(<span class="st">&#39;en&#39;</span>, language_code)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-17" data-line-number="17"><span class="st">  </span><span class="co">## drop observations with no publication year</span></a>
+<a class="sourceLine" id="cb1-18" data-line-number="18"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(original_publication_year)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-19" data-line-number="19"><span class="st">  </span><span class="co">## mutate data types</span></a>
+<a class="sourceLine" id="cb1-20" data-line-number="20"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">goodreads_book_id =</span> <span class="kw">as.integer</span>(goodreads_book_id),</a>
+<a class="sourceLine" id="cb1-21" data-line-number="21">         <span class="dt">authors =</span> <span class="kw">as.character</span>(authors),</a>
+<a class="sourceLine" id="cb1-22" data-line-number="22">         <span class="dt">title =</span> <span class="kw">as.character</span>(title),</a>
+<a class="sourceLine" id="cb1-23" data-line-number="23">         <span class="dt">language_code =</span> <span class="kw">as.character</span>(language_code)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-24" data-line-number="24"><span class="st">  </span><span class="co">## Select items for item profile</span></a>
+<a class="sourceLine" id="cb1-25" data-line-number="25"><span class="st">  </span><span class="kw">select</span>(goodreads_book_id, title, authors) </a>
+<a class="sourceLine" id="cb1-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb1-27" data-line-number="27"><span class="co"># Clean Tags data</span></a>
+<a class="sourceLine" id="cb1-28" data-line-number="28">tidy_tags &lt;-<span class="st"> </span>tags_id <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-29" data-line-number="29"><span class="st">  </span><span class="co">## join tag_ids using book id</span></a>
+<a class="sourceLine" id="cb1-30" data-line-number="30"><span class="st">  </span><span class="kw">left_join</span>(tags_data, <span class="dt">by =</span> <span class="st">&quot;tag_id&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-31" data-line-number="31"><span class="st">  </span><span class="co"># Find/remove numbers and punctuation</span></a>
+<a class="sourceLine" id="cb1-32" data-line-number="32"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tag_name =</span> <span class="kw">gsub</span>(<span class="st">&quot;[0-9]|[[:punct:]]&quot;</span>, <span class="st">&quot; &quot;</span>, tag_name)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-33" data-line-number="33"><span class="st">  </span><span class="co"># Filter empty columns containing only whitespace</span></a>
+<a class="sourceLine" id="cb1-34" data-line-number="34"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">grepl</span>(<span class="st">&#39;</span><span class="ch">\\</span><span class="st">w&#39;</span>, tag_name)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-35" data-line-number="35"><span class="st">  </span><span class="co">## Drop tag columns no longer needed </span></a>
+<a class="sourceLine" id="cb1-36" data-line-number="36"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>tag_id, <span class="op">-</span>count)</a>
+<a class="sourceLine" id="cb1-37" data-line-number="37"></a>
+<a class="sourceLine" id="cb1-38" data-line-number="38"><span class="co"># Build Item Profile</span></a>
+<a class="sourceLine" id="cb1-39" data-line-number="39">item_profile &lt;-<span class="st"> </span>tidy_books <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-40" data-line-number="40"><span class="st">  </span><span class="co">## join tags data using tag ids </span></a>
+<a class="sourceLine" id="cb1-41" data-line-number="41"><span class="st">  </span><span class="kw">left_join</span>(tidy_tags, <span class="dt">by =</span> <span class="st">&quot;goodreads_book_id&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-42" data-line-number="42"><span class="st">  </span><span class="co">## Mutate data type of tag name variable </span></a>
+<a class="sourceLine" id="cb1-43" data-line-number="43"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tag_name =</span> <span class="kw">as.character</span>(tag_name))  <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-44" data-line-number="44"><span class="st">  </span><span class="co">## Rename for simplicity</span></a>
+<a class="sourceLine" id="cb1-45" data-line-number="45"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">tags =</span> tag_name, <span class="dt">id =</span> goodreads_book_id) </a></code></pre></div>
+<h4>
+Item Profile Exerpt:
+</h4>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["id"],"name":[1],"type":["int"],"align":["right"]},{"label":["title"],"name":[2],"type":["chr"],"align":["left"]},{"label":["authors"],"name":[3],"type":["chr"],"align":["left"]},{"label":["tags"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"to read"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"fantasy"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"favorites"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"currently reading"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"young adult"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"fiction"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"harry potter"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"books i own"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"owned"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"ya"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"series"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"favourites"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"magic"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"childrens"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"owned books"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"re read"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"adventure"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"children"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"j k rowling"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"children s"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"sci fi fantasy"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"childhood"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"all time favorites"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"default"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"my books"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"classics"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"reread"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"i own"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"audiobook"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"stars"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"children s books"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"favorite books"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"kids"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"novels"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"fantasy sci fi"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"favorite"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"middle grade"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"audiobooks"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"paranormal"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"read more than once"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"my library"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"ya fantasy"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"teen"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"witches"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"english"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"urban fantasy"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"british"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"jk rowling"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"books"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"read in"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"supernatural"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"re reads"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"mystery"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"ya fiction"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"harry potter series"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"my favorites"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"own it"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"childrens books"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"library"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"audio"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"young adult fiction"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"novel"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"scifi fantasy"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"wizards"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"faves"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"favorite series"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"read in"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"made me cry"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"juvenile"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"shelfari favorites"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"kindle"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"youth"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"romance"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"favourite"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"to buy"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"read in"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"to re read"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"all time favourites"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"childhood favorites"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"kids books"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"ebook"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"rereads"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"contemporary"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"read in english"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"star"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"coming of age"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"science fiction fantasy"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"read in"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"england"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"children s literature"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"favourite books"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"on my shelf"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"my bookshelf"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"children s lit"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"bookshelf"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"magical"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"favs"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"childhood books"},{"1":"1","2":"Harry Potter and the Half-Blood Prince (Harry Potter, #6)","3":"J.K. Rowling, Mary GrandPré","4":"potter"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<h3>
+Term Frequency - Inverse Document Frequency
+</h3>
+<p>
+Term Frequency <em>times</em> Inverse Document Frequency (TF-IDF) uses text-mining to score important words by occurance. We can apply this process to our item profile to evaluate tag importance for each book and generate recommendations.
+</p>
+<h4>
+Term Frequency
+</h4>
+<p>
+First, let’s look at term frequency (TF) using a document-term matrix (DTM). A DTM evaluates the frequency of terms per document within a corpus of text. We can construct a DTM from the <code>item_profile</code> dataframe to analyse the text within each book tag.
+</p>
+<p>
+Using the <strong><code>tidytext</code></strong> package, each row was unnested by word and then further processed with the <strong><code>tm</code> </strong> and <strong><code>SnowballC</code></strong> packages. Common, stop words such as “and”, were removed. Words were also stemmed to obtain the base form of each word. An example of this would be stemming the word, “winning”, to “win”.
+</p>
+<p>
+The frequency of each word per book id was then evaluated, tallied, and casted into the DTM.
+</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(tidytext); <span class="kw">library</span>(tm); <span class="kw">library</span>(SnowballC)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co"># Document-term Matrix </span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">dtm &lt;-<span class="st"> </span>item_profile <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="st">  </span><span class="co">## Split tag corpa into tokens  </span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="st">  </span>tidytext<span class="op">::</span><span class="kw">unnest_tokens</span>(<span class="dt">token =</span> <span class="st">&quot;words&quot;</span>, tags, tags) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="st">  </span><span class="co">## Tidy: Remove stop words</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>tags <span class="op">%in%</span><span class="st"> </span>tm<span class="op">::</span><span class="kw">stopwords</span>(<span class="dt">kind =</span> <span class="st">&quot;english&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="st">  </span><span class="co">## Tidy: Stem words</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="st">  </span><span class="kw">mutate_at</span>(<span class="st">&quot;tags&quot;</span>, <span class="kw">funs</span>(SnowballC<span class="op">::</span><span class="kw">wordStem</span>((.), <span class="dt">language=</span><span class="st">&quot;english&quot;</span>))) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="st">  </span><span class="co">## Count frequency of tags</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="st">  </span><span class="kw">count</span>(id, tags) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="st">  </span><span class="co">## Cast tidied dataframe into DocumentTermMatrix</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="st">  </span>tidytext<span class="op">::</span><span class="kw">cast_dtm</span>(<span class="dt">term =</span> tags,<span class="dt">document =</span> id,  <span class="dt">value =</span> n) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="st">  </span><span class="co">## Remove sparse terms with maximum sparisity of 90%</span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="st">  </span>tm<span class="op">::</span><span class="kw">removeSparseTerms</span>(.<span class="dv">9</span>)</a>
+<a class="sourceLine" id="cb2-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co"># Inspect sample from DTM</span></a>
+<a class="sourceLine" id="cb2-19" data-line-number="19">tm<span class="op">::</span><span class="kw">inspect</span>(dtm)</a></code></pre></div>
+<pre><code>&lt;&lt;DocumentTermMatrix (documents: 8715, terms: 137)&gt;&gt;
+Non-/sparse entries: 380191/813764
+Sparsity           : 68%
+Maximal term length: 12
+Weighting          : term frequency (tf)
+Sample             :
+          Terms
+Docs       adult book fantasi favorit fiction librari mysteri own read seri
+  125404       2   18       4       2       7       4       0   2   13    1
+  17533        3   11       0       9      10       2       0   2   10    1
+  225038       2   16       7       4       6       3       0   2   11    1
+  232576       3   17       0       6       6       2       1   2   10    1
+  24780        4   10      17       3      10       2       0   2   10    2
+  25053        2   21       1       4       5       4       0   2   15    1
+  25613617     2   16       0       2       5       3      12   1   19    4
+  77276        2    9      12       5      11       3       0   2    7    1
+  906541       2   31       1       7       4       2       0   2   12    1
+  9436746      2   15       0       2       3       4      11   2   17    5</code></pre>
+<h4>
+Inverse Document Frequency
+</h4>
+<p>
+The inverse document frequency (IDF) component informs how useful a term is. This is calculated by taking the logarithm of the total the number of terms within the corpus divided the total by the number of documents were an individual term appears. The <strong><code>tm</code></strong> package can be used again efficiently weight the sparse, document term matrix by calculating and multiplying the TF and IDF matrices.
+</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">tfidf &lt;-<span class="st"> </span>tm<span class="op">::</span><span class="kw">weightTfIdf</span>(dtm, <span class="dt">normalize =</span> T)</a></code></pre></div>
+<h3>
+Text Clustering
+</h3>
+<p>
+Text clustering is used to understand and categorize text-based documents, such as the terms in our TF-IDF matrix. We can cluster the data by applying cosine similarity to the TF-IDF matrix to evaluate the distance between document terms. The corresponding values provide a measurement of similarity between the terms.
+</p>
+<p>
+While <strong><code>tm</code></strong> was useful for large-scale TF-IDF matrix calculation, this method results in a sparse, simple_triplet_matrix. The cosine similiary is calculated below using the slam package to properly interpret this data type.
+</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">library</span>(slam)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">co_sim &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">crossprod_simple_triplet_matrix</span>(tfidf)<span class="op">/</span>(<span class="kw">sqrt</span>(<span class="kw">col_sums</span>(tfidf<span class="op">^</span><span class="dv">2</span>) <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(<span class="kw">col_sums</span>(tfidf<span class="op">^</span><span class="dv">2</span>))))</a></code></pre></div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
